@@ -1,0 +1,25 @@
+{
+    "name": "ml-edit",
+    "displayName": "ML Edit CNC",
+    "description": "Linguaggio Per CNC D.Electron",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.49.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "ml",
+            "aliases": ["ML", "ml"],
+            "extensions": [".ml"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "ml",
+            "scopeName": "source.ml",
+            "path": "./syntaxes/ml.tmLanguage.json"
+        }]
+    }
+}
