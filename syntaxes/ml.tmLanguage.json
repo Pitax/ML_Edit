@@ -55,27 +55,36 @@
 		},
 		"strings": 
 		{
-			"name": "string.quoted.double.ml",
-			"begin": "\"",
-			"end": "\"",
 			"patterns": 
 			[
 				{
-					"name": "constant.character.escape.ml",
-					"match": "\\\\."
+					"name": "string.unquoted.ml",
+					"match": "=|<|>|-|\\$|\\*|\\+|\\b(or|and|RETURN|END DECLARE|TIMED:|FUNCTION:|PERMANENT STRING BYTE:|PERMANENT WORD:|PERMANENT BYTE:|STRING LONG:|STRING WORD:|STRING BYTE:|LONG:|WORD:|BYTE:|BIT:|CONSTANT:|TRANSLATE:|DECLARE:|End Function|Function|if|elseif|else|end if|Module 24|Module 8|Module 2|End Module)\\b"
 				}
-			]
+			]			
 		},
 		"entity": 
 		{
 			"patterns":
 			[{
-				"name": "entity.name.type.ml",
-				"match": "\\b(verde)\\b"
+				"name": "entity.name.function.ml",
+				"match": "\\b(giallo chiaro)\\b"
 			},
 			{
-				"name": "entity.name.function.ml",
-				"match": "\\b(giallochiaro)\\b"
+				"name": "entity.name.tag.ml",
+				"match": "\\b(Include|HHALARM|HHBOARDALARM|HHBOX|HHBRAKE|HHBRAKESTAT|HHCONTROL|HHCURR|HHCURRPERC|HHDCVOLT|HHDCVOLTOFF|HHENCMV|HHENCVERR|HHENCWARN|HHENDATN|HHENDATP|HHEVOALARM|HHEVOHW|HHEVORXER|HHEVOSTATUS|HHEVOTEMP|HHEVOTXER|HHEVOUPDSTATUS|HHEVOVERSION|HHIINTDTAR|HHIINTTAR|HHEVOWARNING|HHIMAXDTAR|HHIMAXTAR|HHIMOD|HHIMODPERC|HHIPROPDTAR|HHIPROPTAR|HHIREF|HHIREFPERC|HHIREFSET|HHISD|HHKVREFSET|HHMOTENC|HHMOTORSTATUS|HHMOTREF|HHMOTVEL|HHMOTVOLT|HHNOSMOOTHREF|HHPOLEPOS|HHPOSENC|HHPOWER|HHPOWERPERC|HHPOWEVOPOS|HHSAFESTAT|HHSLIP|HHSLSACTIVATE|HHSLSACTIVSTATUS|HHSLSSTATUS|HHSOSACTIVATE|HHSOSACTIVSTATUS|HHSOSSTATUS|HHSPEEDTOL|HHSPINLOAD|HHSTATUS|HHTEMPDRI|HHTEMPMOT|HHTIMES|HHTORQUE|HHTORQUEMODE|HHTURBOFREQ|HHTURBOMAP|HHTURNUNIT|HHVERS|HHVINTDTAR|HHVINTTAR|HHVPROPDTAR|HHVPROPTAR|HHVREFSET|HHVSD|HHVSQ|HHWARNING|HHZEROSTATUS|HHZEROTYPE)\\b"
+			},
+			{
+				"name": "entity.name.type.ml",
+				"match": "\\b(verde acceso)\\b"
+			},
+			{
+				"name": "entity.other.attribute-name.ml",
+				"match": "\\b(azzurro)\\b"
+			},
+			{
+				"name": "entity.other.inherited-class.ml",
+				"match": "\\b(verde acceso)\\b"
 			}]
 		},
 		"invalid": 
@@ -90,20 +99,21 @@
 		{
 			"patterns": 
 			[{
-				"name": "constant.language.ml",
-				"match": "\\b(blue)\\b"
+				"name": "constant.numeric.ml",
+				"match": "\\b(verde chiaro)\\b"
 			},
 			{
 				"name": "constant.character.escape.ml",
-				"match": "\\b(RETURN|END DECLARE|TIMED:|FUNCTION:|PERMANENT STRING BYTE:|PERMANENT WORD:|PERMANENT BYTE:|STRING LONG:|STRING WORD:|STRING BYTE:|LONG:|WORD:|BYTE:|BIT:|CONSTANT:|TRANSLATE:|DECLARE| = |End Function|Function|if|elseif|end id|Module 24|Module 8|Module 2|End Module)\\b"
+				"begin": "MM",
+				"end": "\\d*"
 			}]
 		},
 		"markup": 
 		{
 			"patterns": 
 			[{
-				"name": "markup.ml",
-				"match": "\\b(markupheading)\\b"
+				"name": "markup.heading.ml",
+				"match": "\\b(blu chiaro)\\b"
 
 			}]
 		},
@@ -112,7 +122,7 @@
 			"patterns": 
 			[{
 				"name": "storage.ml",
-				"match": "\\b(storage)\\b"
+				"match": "\\b(blu chiaro)\\b"
 			}]
 		},
 		"support": 
@@ -120,7 +130,19 @@
 			"patterns": 
 			[{
 				"name": "support.class.ml",
-				"match": "\\b(Include|HHALARM|HHBOARDALARM|HHBOX|HHBRAKE|HHBRAKESTAT|HHCONTROL|HHCURR|HHCURRPERC|HHDCVOLT|HHDCVOLTOFF|HHENCMV|HHENCVERR|HHENCWARN|HHENDATN|HHENDATP|HHEVOALARM|HHEVOHW|HHEVORXER|HHEVOSTATUS|HHEVOTEMP|HHEVOTXER|HHEVOUPDSTATUS|HHEVOVERSION|HHIINTDTAR|HHIINTTAR|HHEVOWARNING|HHIMAXDTAR|HHIMAXTAR|HHIMOD|HHIMODPERC|HHIPROPDTAR|HHIPROPTAR|HHIREF|HHIREFPERC|HHIREFSET|HHISD|HHKVREFSET|HHMOTENC|HHMOTORSTATUS|HHMOTREF|HHMOTVEL|HHMOTVOLT|HHNOSMOOTHREF|HHPOLEPOS|HHPOSENC|HHPOWER|HHPOWERPERC|HHPOWEVOPOS|HHSAFESTAT|HHSLIP|HHSLSACTIVATE|HHSLSACTIVSTATUS|HHSLSSTATUS|HHSOSACTIVATE|HHSOSACTIVSTATUS|HHSOSSTATUS|HHSPEEDTOL|HHSPINLOAD|HHSTATUS|HHTEMPDRI|HHTEMPMOT|HHTIMES|HHTORQUE|HHTORQUEMODE|HHTURBOFREQ|HHTURBOMAP|HHTURNUNIT|HHVERS|HHVINTDTAR|HHVINTTAR|HHVPROPDTAR|HHVPROPTAR|HHVREFSET|HHVSD|HHVSQ|HHWARNING|HHZEROSTATUS|HHZEROTYPE)\\b"
+				"match": "\\b(verdi acceso)\\b"
+			},
+			{
+				"name": "support.function.ml",
+				"match": "\\b(0R0|0R1|0R2|0R3|0R4|0R5|0R6|0R7|0R8|0R9|0RA|0RB|0RC|0RD|0RE|0RF|1R0|1R1|1R2|1R3|1R4|1R5|1R6|1R7|1R8|1R9|1RA|1RB|1RC|1RD|1RE|1RF|2R0|2R1|2R2|2R3|2R4|2R5|2R6|2R7|2R8|2R9|2RA|2RB|2RC|2RD|2RE|2RF|3R0|3R1|3R2|3R3|3R4|3R5|3R6|3R7|3R8|3R9|3RA|3RB|3RC|3RD|3RE|3RF|0T0|0T1|0T2|0T3|0T4|0T5|0T6|0T7|0T8|0T9|0TA|0TB|0TC|0TD|0TE|0TF|1T0|1T1|1T2|1T3|1T4|1T5|1T6|1T7|1T8|1T9|1TA|1TB|1TC|1TD|1TE|1TF|2T0|2T1|2T2|2T3|2T4|2T5|2T6|2T7|2T8|2T9|2TA|2TB|2TC|2TD|2TE|2TF|3T0|3T1|3T2|3T3|3T4|3T5|3T6|3T7|3T8|3T9|3TA|3TB|3TC|3TD|3TE|3TF)\\b"
+			},
+			{
+				"name": "support.type.ml",
+				"match": "\\b(verdi acceso)\\b"
+			},
+			{
+				"name": "support.variable.ml",
+				"match": "\\b(azzurro)\\b"
 			}]
 		},
 		"variable": 
