@@ -16,14 +16,16 @@
 		"multi-root ready"
 	],
 	"engines": {
-		"vscode": "^1.43.0"
+		"vscode": "^1.49.0"
 	},
 	"activationEvents": [
 		"onLanguage:ml"
 	],
 	"main": "./client/out/extension",
-	"contributes": {
-		"configuration": {
+	"contributes": 
+	{
+		"configuration": 
+		{
 			"type": "object",
 			"title": "ML Edit",
 			"properties": {
@@ -46,16 +48,23 @@
 				}
 			}
 		},
-		"languages": [{
+		"languages": 
+		[{
             "id": "ml",
             "aliases": ["ML", "ml"],
             "extensions": [".ml"],
             "configuration": "./language-configuration.json"
         }],
-        "grammars": [{
+		"grammars": 
+		[{
             "language": "ml",
             "scopeName": "source.ml",
             "path": "./syntaxes/ml.tmLanguage.json"
+		}],
+		"snippets": 
+		[{
+                "language": "ml",
+                "path": "./snippets/snippets.code-snippets"
         }]
 	},
 	"scripts": {
