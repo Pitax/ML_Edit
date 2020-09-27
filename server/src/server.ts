@@ -1,8 +1,4 @@
 import { compileFunction } from 'vm';
-/* --------------------------------------------------------------------------------------------
- * Copyright (c) Microsoft Corporation. All rights reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- * ------------------------------------------------------------------------------------------ */
 import {
 	createConnection,
 	TextDocuments,
@@ -12,15 +8,45 @@ import {
 	InitializeParams,
 	DidChangeConfigurationNotification,
 	CompletionItem,
+	Hover,
 	CompletionItemKind,
 	TextDocumentPositionParams,
 	TextDocumentSyncKind,
-	InitializeResult
+	InitializeResult, Range
 } from 'vscode-languageserver';
 
 import {
 	TextDocument
 } from 'vscode-languageserver-textdocument';
+
+//Import per Gestione onHover
+import { CursorInfo} from './common/types'
+const getCursorInfo = (
+	text: string,
+	start: number,
+	end: number
+  ): CursorInfo => {
+	while (start >= 0 && /[a-zA-Z0-9_#@]/.test(text[start])) {
+	  start--
+	}
+  
+	while (end < text.length && /[a-zA-Z0-9_(]/.test(text[end])) {
+	  end++
+  
+	  if (text.substr(end - 1, 1) === '(') {
+		return {
+		  type: 'function',
+		  word: text.substr(start + 1, end - start - 1)
+		}
+	  }
+	}
+  
+	return {
+	  type: 'default',
+	  word: text.substr(start + 1, end - start - 1)
+	}
+  }
+
 
 // Create a connection for the server, using Node's IPC as a transport.
 // Also include all preview / proposed LSP features.
@@ -56,7 +82,8 @@ connection.onInitialize((params: InitializeParams) => {
 			// Tell the client that this server supports code completion.
 			completionProvider: {
 				resolveProvider: true
-			}
+			},
+			hoverProvider: true
 		}
 	};
 	if (hasWorkspaceFolderCapability) {
@@ -238,8 +265,9 @@ connection.onCompletion(
 		// info and always provide the same completion items.
 		return [
 			//Funzioni
-		//	{label: 'HHALARM', kind: CompletionItemKind.Function, detail: 'prova', data: 1},
-		//   {label: 'ABS', kind: CompletionItemKind.Function, data: 1	},	   
+		// 	{label: '', kind: CompletionItemKind.Text},
+		// 	{label: 'HHALARM', kind: CompletionItemKind.Function, detail: 'prova', data: 1},
+		//  {label: 'ABS', kind: CompletionItemKind.Function, data: 1	},	   
 		];
 	}
 );
@@ -263,6 +291,31 @@ connection.onCompletionResolve(
 		return item;
 	}
 );
+
+//Aggiunt
+
+//Gestion di onHover
+connection.onHover(
+	(_textDocumentPosition: TextDocumentPositionParams): Hover | undefined => {
+	  const document: TextDocument | undefined = documents.get(_textDocumentPosition.textDocument.uri)
+ 	  if (!document) {
+		return {
+		  contents: ''
+		}
+	  }
+  
+	  const text: string = document.getText()
+	  const offset: number = document.offsetAt(_textDocumentPosition.position)
+  
+	  let start: number = offset
+	  let end: number = offset + 1
+  
+	  const cursorInfo: CursorInfo = getCursorInfo(text, start, end)
+	  
+	  if (cursorInfo.word = 'HHCONTROL') 
+	  {return { contents: 'Consente di controllare in tempo reale il funzionamento degli azionamenti digitali\n\rBit 0: 1= Comando di Reset allarmi azionamento'}}
+	}
+  )
 
 // Make the text document manager listen on the connection
 // for open, change and close text document events
