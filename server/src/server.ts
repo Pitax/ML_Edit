@@ -271,7 +271,7 @@ connection.onCompletion(
 		{label: 'JOGNCNC', kind: CompletionItemKind.Field, detail:'Jog Neg verso CNC'},
 		{label: 'RESETCNC', kind: CompletionItemKind.Field, detail:'RESET verso CNC'},
 		{label: 'OVRFEED', kind: CompletionItemKind.Class, detail:'Override G1 G2 G3'},
-		{label: 'OVRSPEED', kind: CompletionItemKind.Class, detail:'Override Speed'},
+		{label: 'OVRSPEED', kind: CompletionItemKind.Class, detail:'Override Speed MND'},
 		{label: 'MOTOM', kind: CompletionItemKind.Field, detail:'Avvio Moto Mandrino'},
 		{label: 'POSM', kind: CompletionItemKind.Field, detail:'Avvio Pos. Mandrino'},
 		{label: 'SMAN', kind: CompletionItemKind.Field, detail:'Cambia Senso Rot. Mandrino'},
@@ -281,7 +281,6 @@ connection.onCompletion(
 		{label: 'CNCSTR', kind: CompletionItemKind.Function, detail:'START dal CNC'},
 		{label: 'CNCNOALL', kind: CompletionItemKind.Function, detail:'Nessun Allarme dal CNC'},
 		{label: 'CNCRST', kind: CompletionItemKind.Function, detail:'RESET dal CNC'},
-		{label: 'CNCNEWM', kind: CompletionItemKind.Function, detail:'Nuova Funzione M dal CNC'},
 		{label: 'BLOC', kind: CompletionItemKind.Function, detail:'STOP dal CNC'},
 		{label: 'CNCAJOGP', kind: CompletionItemKind.Function, detail:'Asse in JOG Pos dal CNC'},
 		{label: 'CNCAJOGN', kind: CompletionItemKind.Function, detail:'Asse in JOG neg dal CNC'},
@@ -300,15 +299,47 @@ connection.onCompletion(
 		//Aiuti vari CNC
 		{label: 'Module 24', kind: CompletionItemKind.Interface, detail:'Modulo 24ms'},
 		{label: 'Module 2', kind: CompletionItemKind.Interface, detail:'Modulo 2ms'},
-		{label: 'End Module', kind: CompletionItemKind.Interface, detail:'Modulo 2ms'},
 		{label: 'Function', kind: CompletionItemKind.Interface, detail:'Inzio Funzione'},
-		{label: 'End Function', kind: CompletionItemKind.Interface, detail:'Fine Funzione'},
 		{label: 'Include', kind: CompletionItemKind.Interface, detail:'Includi File'},
-		{label: 'if', kind: CompletionItemKind.Interface, detail:'Inizio if'},
-		{label: 'elseif', kind: CompletionItemKind.Interface, detail:'Funzione elsif'},
-		{label: 'end if', kind: CompletionItemKind.Interface, detail:'Fine if'},
-		{label: 'and', kind: CompletionItemKind.Interface, detail:'and'},
-		{label: 'or', kind: CompletionItemKind.Interface, detail:'or'},
+		// {label: 'End Module', kind: CompletionItemKind.Interface, detail:'Modulo 2ms'},
+		// {label: 'End Function', kind: CompletionItemKind.Interface, detail:'Fine Funzione'},
+		// {label: 'if', kind: CompletionItemKind.Interface, detail:'Inizio if'},
+		// {label: 'elseif', kind: CompletionItemKind.Interface, detail:'Funzione elsif'},
+		// {label: 'else', kind: CompletionItemKind.Interface, detail:'Funzione Else'},
+		// {label: 'end if', kind: CompletionItemKind.Interface, detail:'Fine if'},
+		// {label: 'and', kind: CompletionItemKind.Interface, detail:'and'},
+		// {label: 'or', kind: CompletionItemKind.Interface, detail:'or'},
+		// //Variabili Finecorsa e rilevatori
+		{label: 'FCXPOS', kind: CompletionItemKind.Interface, detail:'Finecorsa X Positivo'},
+		{label: 'FCXNEG', kind: CompletionItemKind.Interface, detail:'Finecorsa X Negativo'},
+		{label: 'FCYPOS', kind: CompletionItemKind.Interface, detail:'Finecorsa Y Positivo'},
+		{label: 'FCYNEG', kind: CompletionItemKind.Interface, detail:'Finecorsa Y Negativo'},
+		{label: 'FCZPOS', kind: CompletionItemKind.Interface, detail:'Finecorsa Z Positivo'},
+		{label: 'FCZNEG', kind: CompletionItemKind.Interface, detail:'Finecorsa Z Negativo'},
+		{label: 'FCAPOS', kind: CompletionItemKind.Interface, detail:'Finecorsa A Positivo'},
+		{label: 'FCANEG', kind: CompletionItemKind.Interface, detail:'Finecorsa A Negativo'},
+		{label: 'FCCPOS', kind: CompletionItemKind.Interface, detail:'Finecorsa C Positivo'},
+		{label: 'FCCNEG', kind: CompletionItemKind.Interface, detail:'Finecorsa C Negativo'},
+		{label: 'FCDPOS', kind: CompletionItemKind.Interface, detail:'Finecorsa D Positivo'},
+		{label: 'FCDNEG', kind: CompletionItemKind.Interface, detail:'Finecorsa D Negativo'},
+		{label: 'FCXPOSTAR', kind: CompletionItemKind.Interface, detail:'FC Tarat X Positivo'},
+		{label: 'FCXNEGTAR', kind: CompletionItemKind.Interface, detail:'FC Tarat  X Negativo'},
+		{label: 'FCYPOSTAR', kind: CompletionItemKind.Interface, detail:'FC Tarat  Y Positivo'},
+		{label: 'FCYNEGTAR', kind: CompletionItemKind.Interface, detail:'FC Tarat  Y Negativo'},
+		{label: 'FCZPOSTAR', kind: CompletionItemKind.Interface, detail:'FC Tarat  Z Positivo'},
+		{label: 'FCZNEGTAR', kind: CompletionItemKind.Interface, detail:'FC Tarat  Z Negativo'},
+		{label: 'FCAPOSTAR', kind: CompletionItemKind.Interface, detail:'FC Tarat  A Positivo'},
+		{label: 'FCANEGTAR', kind: CompletionItemKind.Interface, detail:'FC Tarat  A Negativo'},
+		{label: 'FCCPOSTAR', kind: CompletionItemKind.Interface, detail:'FC Tarat  C Positivo'},
+		{label: 'FCCNEGTAR', kind: CompletionItemKind.Interface, detail:'FC Tarat  C Negativo'},
+		{label: 'FCDPOSTAR', kind: CompletionItemKind.Interface, detail:'FC Tarat  D Positivo'},
+		{label: 'FCDNEGTAR', kind: CompletionItemKind.Interface, detail:'FC Tarat  D Negativo'},
+		{label: 'ASSEXVIVO', kind: CompletionItemKind.Interface, detail:'FC Tarat  D Negativo'},
+		//Variabili Messaggi
+		{label: 'HOLDMSG', kind: CompletionItemKind.Interface, detail:'Messaggio HOLD in corso'},
+		{label: 'STOPMSG', kind: CompletionItemKind.Interface, detail:'Messaggio STOP in corso'},
+		{label: 'ALARMMSG', kind: CompletionItemKind.Interface, detail:'Messaggio ALARM in corso'},
+
 		];
 	}
 );
@@ -380,6 +411,10 @@ connection.onHover(
 	   {return { contents: 'La funzione consente di generare un riferimento, analogico o digitale, applicando un incremento.\n\rriferim = Valore del riferimento in uscita (+- 27594 max).\n\rnumout = Numero del canale di uscita su cui generare il riferimento:\n\rda 0 a 15 scrittura nell`area T dello Z-Link\n\rda 16 a 31 riferimenti analogici Z-Link\n\rda 32 a 63 scrittura da ZZLINK[160] a ZZLINK[191]\n\rda 64 a 79 scrittura nell`area S dello Z-Link\n\rda 80 a 96 scrittura da ZZLINK[208] a ZZLINK[224]\n\rda 100 a 114 numero asse ZSER (per assi da 0S a 14S)\n\rda 200 a 231 numero asse Z-STAR (per assi da 0H a 31H)\n\rda 300 a 315 numero asse Mechatrolink (per assi da 0M a 15M)\n\rincremento = Incremento del riferimento (valore assoluto sempre positivo)\n\r'}}	
 	   else if (cursorInfo.word === 'WRPRM') 
 	   {return { contents: 'Consente di accedere in scrittura nell`array di parametri permanenti non di processo, con formato string long PRM[8192].'}}
+	   else if (cursorInfo.word === 'GGSK') 
+	   {return { contents: 'Contiene lo stato delle SOFTKEYS\n\rFormato "GGSK[MENU}.TASTO"\n\rInput numerico viene messo nella variabile GGSK[2041] '}}   
+	   else if (cursorInfo.word === 'PRESS') 
+	   {return { contents: 'Simula la pressione (MDI) di tasti alfanumerici contenuti in "stringabyte" nel processo specificato.'}}   
 	   //Variabili ZZ
 	   else if (cursorInfo.word === 'ZZSTATOTAS') 
 	   {return { contents: 'Contiene informazioni sullo stato della tastiera ed in generale sull`attività in corso in Z32.'}}
@@ -409,6 +444,16 @@ connection.onHover(
 	   {return { contents: 'Fornisce il numero dell`utensile attivo, ossia lo stesso valore che la G104 di part-program restituisce in HX.'}}	
 	   else if (cursorInfo.word === 'ZZMDIJOGFILE') 
 	   {return { contents: 'Contiene il numero del file CMOS associato al bit di ZZMDIJOGMAP.'}}	
+	   else if (cursorInfo.word === 'ZZLIMIT') 
+	   {return { contents: 'Contengono i finecorsa degli assi continui del processo espressi in millesimi di micron riferiti allo Zero Rilevatore.'}}	
+	   else if (cursorInfo.word === 'ZZLIMITAR') 
+	   {return { contents: 'Contengono i finecorsa degli assi continui del processo espressi in millesimi di micron riferiti allo Zero Rilevatore impostati in TARAT'}}	
+	   else if (cursorInfo.word === 'ZZAXLIVE') 
+	   {return { contents: 'Mappa degli assi vivi in tempo reale.'}}	
+	   else if (cursorInfo.word === 'ZZBUFPOS') 
+	   {return { contents: 'Quote assi riferite allo zero rilevatore, espressi in millesimi di unità visualizzata.'}}	
+	   else if (cursorInfo.word === 'ZZMESFLAG') 
+	   {return { contents: 'Word per la gestione evoluta dei messagi.\r\nbit 0: Messagio di HOLD in corso\r\nbit 1: Messagio di STOP in corso\r\nbit 2: Messagio di ALARM in corso'}}	
 	   //Variabili della memoria di Sistema	Verso il CNC   
 	   else if (cursorInfo.word === 'STARTCNC') 
 	   {return { contents: 'Bit 0E0 - Richiesta si START'}}	
@@ -439,7 +484,7 @@ connection.onHover(
 	   else if (cursorInfo.word === 'OVRFEED') 
 	   {return { contents: 'Byte 1E Low - Override Feed (Non funziona sui blocchi G0)'}}	
 	   else if (cursorInfo.word === 'OVRSPEED') 
-	   {return { contents: 'Byte 1E High - Override Speed'}}	
+	   {return { contents: 'Byte 1E High - Override Speed Mandrino'}}	
 	   else if (cursorInfo.word === 'MOTOM') 
 	   {return { contents: 'Bit 3E0 - Richista di Moto mandrino'}}	
 	   else if (cursorInfo.word === 'POSM') 
@@ -536,23 +581,23 @@ connection.onHover(
 	   else if (cursorInfo.word === 'CNCG39') 
 	   {return { contents: 'Bit 1UD - Sospensione del ciclo i cambio utensile'}}	
 	   else if (cursorInfo.word === 'CNCMOVAX0') 
-	   {return { contents: 'Bit 2U0 - Sblocco Asse nlog 0'}}	
+	   {return { contents: 'Bit 2U0 - Sblocco Asse Nlog 0'}}	
 	   else if (cursorInfo.word === 'CNCMOVAX1') 
-	   {return { contents: 'Bit 2U1 - Sblocco Asse nlog 1'}}	
+	   {return { contents: 'Bit 2U1 - Sblocco Asse Nlog 1'}}	
 	   else if (cursorInfo.word === 'CNCMOVAX2') 
-	   {return { contents: 'Bit 2U2 - Sblocco Asse nlog 2'}}	
+	   {return { contents: 'Bit 2U2 - Sblocco Asse Nlog 2'}}	
 	   else if (cursorInfo.word === 'CNCMOVAX3') 
-	   {return { contents: 'Bit 2U3 - Sblocco Asse nlog 3'}}	
+	   {return { contents: 'Bit 2U3 - Sblocco Asse Nlog 3'}}	
 	   else if (cursorInfo.word === 'CNCMOVAX4') 
-	   {return { contents: 'Bit 2U4 - Sblocco Asse nlog 4'}}	
+	   {return { contents: 'Bit 2U4 - Sblocco Asse Nlog 4'}}	
 	   else if (cursorInfo.word === 'CNCMOVAX5') 
-	   {return { contents: 'Bit 2U5 - Sblocco Asse nlog 5'}}	
+	   {return { contents: 'Bit 2U5 - Sblocco Asse Nlog 5'}}	
 	   else if (cursorInfo.word === 'CNCMOVAX6') 
-	   {return { contents: 'Bit 2U6 - Sblocco Asse nlog 6'}}	
+	   {return { contents: 'Bit 2U6 - Sblocco Asse Nlog 6'}}	
 	   else if (cursorInfo.word === 'CNCMOVAX7') 
-	   {return { contents: 'Bit 2U7 - Sblocco Asse nlog 7'}}	
+	   {return { contents: 'Bit 2U7 - Sblocco Asse Nlog 7'}}	
 	   else if (cursorInfo.word === 'CNCMOVAX15') 
-	   {return { contents: 'Bit 2UF - Sblocco Asse nlog 15'}}	
+	   {return { contents: 'Bit 2UF - Sblocco Asse Nlog 15'}}	
 	   else if (cursorInfo.word === 'TB') 
 	   {return { contents: 'Bit 3UL - Posto Utensile Programmato'}}	
 	   else if (cursorInfo.word === 'TA') 
@@ -574,29 +619,109 @@ connection.onHover(
 	   else if (cursorInfo.word === 'MMIN') 
 	   {return { contents: 'Bit 5UE - Velocità di taglio costante in corso'}}	
 	   else if (cursorInfo.word === 'WORD8U') 
-	   {return { contents: 'Word 8U - Word Assi Con Zeri in Corso'}}	
+	   {return { contents: 'Contiene il codice del parametro MC programmato, BCD, 4 cifre.'}}	
 	   else if (cursorInfo.word === 'CNCZEROAX0') 
-	   {return { contents: 'Bit 9U0 - Zero in Corso Asse nLog 0'}}	
+	   {return { contents: 'Bit 9U0 - Zero in Corso Asse Nlog 0'}}	
 	   else if (cursorInfo.word === 'CNCZEROAX1') 
-	   {return { contents: 'Bit 9U1 - Zero in Corso Asse nLog 1'}}	
+	   {return { contents: 'Bit 9U1 - Zero in Corso Asse Nlog 1'}}	
 	   else if (cursorInfo.word === 'CNCZEROAX2') 
-	   {return { contents: 'Bit 9U2 - Zero in Corso Asse nLog 2'}}	
+	   {return { contents: 'Bit 9U2 - Zero in Corso Asse Nlog 2'}}	
 	   else if (cursorInfo.word === 'CNCZEROAX3') 
-	   {return { contents: 'Bit 9U3 - Zero in Corso Asse nLog 3'}}	
+	   {return { contents: 'Bit 9U3 - Zero in Corso Asse Nlog 3'}}	
 	   else if (cursorInfo.word === 'CNCZEROAX4') 
-	   {return { contents: 'Bit 9U4 - Zero in Corso Asse nLog 4'}}	
+	   {return { contents: 'Bit 9U4 - Zero in Corso Asse Nlog 4'}}	
 	   else if (cursorInfo.word === 'CNCZEROAX5') 
-	   {return { contents: 'Bit 9U5 - Zero in Corso Asse nLog 5'}}	
+	   {return { contents: 'Bit 9U5 - Zero in Corso Asse Nlog 5'}}	
 	   else if (cursorInfo.word === 'CNCZEROAX6') 
-	   {return { contents: 'Bit 9U6 - Zero in Corso Asse nLog 6'}}	
+	   {return { contents: 'Bit 9U6 - Zero in Corso Asse Nlog 6'}}	
 	   else if (cursorInfo.word === 'CNCZEROAX7') 
-	   {return { contents: 'Bit 9U7 - Zero in Corso Asse nLog 7'}}	
+	   {return { contents: 'Bit 9U7 - Zero in Corso Asse Nlog 7'}}	
 	   else if (cursorInfo.word === 'MRAMP') 
 	   {return { contents: 'Bit EU4 - Mandrino in Rampa'}}	
 	   else if (cursorInfo.word === 'MANDINMOTO') 
 	   {return { contents: 'Bit EUB - Mandrino in Moto'}}	
 	   else if (cursorInfo.word === 'MANDVELOK') 
 	   {return { contents: 'Bit EUC - Mandrino a velocità richiesta'}}	
+	   //Varibili Limiti Rilevatori
+	   else if (cursorInfo.word === 'FCXPOS') 
+	   {return { contents: 'Finecrosa Asse X Positivo in millesimi di micron riferito allo zero rilevatore'}}	
+	   else if (cursorInfo.word === 'FCXNEG') 
+	   {return { contents: 'Finecrosa Asse X Negativo in millesimi di micron riferito allo zero rilevatore'}}	
+	   else if (cursorInfo.word === 'FCYPOS') 
+	   {return { contents: 'Finecrosa Asse Y Positivo in millesimi di micron riferito allo zero rilevatore'}}	
+	   else if (cursorInfo.word === 'FCYNEG') 
+	   {return { contents: 'Finecrosa Asse Y Negativo in millesimi di micron riferito allo zero rilevatore'}}	
+	   else if (cursorInfo.word === 'FCZPOS') 
+	   {return { contents: 'Finecrosa Asse Z Positivo in millesimi di micron riferito allo zero rilevatore'}}	
+	   else if (cursorInfo.word === 'FCZNEG') 
+	   {return { contents: 'Finecrosa Asse Z Negativo in millesimi di micron riferito allo zero rilevatore'}}	
+	   else if (cursorInfo.word === 'FCAPOS') 
+	   {return { contents: 'Finecrosa Asse A Positivo in millesimi di micron riferito allo zero rilevatore'}}	
+	   else if (cursorInfo.word === 'FCANEG') 
+	   {return { contents: 'Finecrosa Asse A Negativo in millesimi di micron riferito allo zero rilevatore'}}	
+	   else if (cursorInfo.word === 'FCCPOS') 
+	   {return { contents: 'Finecrosa Asse C Positivo in millesimi di micron riferito allo zero rilevatore'}}	
+	   else if (cursorInfo.word === 'FCCNEG') 
+	   {return { contents: 'Finecrosa Asse C Negativo in millesimi di micron riferito allo zero rilevatore'}}	
+	   else if (cursorInfo.word === 'FCDPOS') 
+	   {return { contents: 'Finecrosa Asse D Positivo in millesimi di micron riferito allo zero rilevatore'}}	
+	   else if (cursorInfo.word === 'FCDNEG') 
+	   {return { contents: 'Finecrosa Asse D Negativo in millesimi di micron riferito allo zero rilevatore'}}	
+	   else if (cursorInfo.word === 'FCXPOSTAR') 
+	   {return { contents: 'Finecrosa Asse X Positivo in millesimi di micron riferito allo zero rilevatore impostato in taratura'}}	
+	   else if (cursorInfo.word === 'FCXNEGTAR') 
+	   {return { contents: 'Finecrosa Asse X Negativo in millesimi di micron riferito allo zero rilevatore impostato in taratura'}}	
+	   else if (cursorInfo.word === 'FCYPOSTAR') 
+	   {return { contents: 'Finecrosa Asse Y Positivo in millesimi di micron riferito allo zero rilevatore impostato in taratura'}}	
+	   else if (cursorInfo.word === 'FCYNEGTAR') 
+	   {return { contents: 'Finecrosa Asse Y Negativo in millesimi di micron riferito allo zero rilevatore impostato in taratura'}}	
+	   else if (cursorInfo.word === 'FCZPOSTAR') 
+	   {return { contents: 'Finecrosa Asse Z Positivo in millesimi di micron riferito allo zero rilevatore impostato in taratura'}}	
+	   else if (cursorInfo.word === 'FCZNEGTAR') 
+	   {return { contents: 'Finecrosa Asse Z Negativo in millesimi di micron riferito allo zero rilevatore impostato in taratura'}}	
+	   else if (cursorInfo.word === 'FCAPOSTAR') 
+	   {return { contents: 'Finecrosa Asse A Positivo in millesimi di micron riferito allo zero rilevatore impostato in taratura'}}	
+	   else if (cursorInfo.word === 'FCANEGTAR') 
+	   {return { contents: 'Finecrosa Asse A Negativo in millesimi di micron riferito allo zero rilevatore impostato in taratura'}}	
+	   else if (cursorInfo.word === 'FCCPOSTAR') 
+	   {return { contents: 'Finecrosa Asse C Positivo in millesimi di micron riferito allo zero rilevatore impostato in taratura'}}	
+	   else if (cursorInfo.word === 'FCCNEGTAR') 
+	   {return { contents: 'Finecrosa Asse C Negativo in millesimi di micron riferito allo zero rilevatore impostato in taratura'}}	
+	   else if (cursorInfo.word === 'FCDPOSTAR') 
+	   {return { contents: 'Finecrosa Asse D Positivo in millesimi di micron riferito allo zero rilevatore impostato in taratura'}}	
+	   else if (cursorInfo.word === 'FCDNEGTAR') 
+	   {return { contents: 'Finecrosa Asse D Negativo in millesimi di micron riferito allo zero rilevatore impostato in taratura'}}	
+	   else if (cursorInfo.word === 'ASSEXVIVO') 
+	   {return { contents: 'Informazioni sullo stato dell`asse X vivo.'}}	
+	   else if (cursorInfo.word === 'ASSEYVIVO') 
+	   {return { contents: 'Informazioni sullo stato dell`asse Y vivo.'}}	
+	   else if (cursorInfo.word === 'ASSEZVIVO') 
+	   {return { contents: 'Informazioni sullo stato dell`asse Z vivo.'}}	
+	   else if (cursorInfo.word === 'ASSEAVIVO') 
+	   {return { contents: 'Informazioni sullo stato dell`asse A vivo.'}}	
+	   else if (cursorInfo.word === 'ASSECVIVO') 
+	   {return { contents: 'Informazioni sullo stato dell`asse C vivo.'}}	
+	   else if (cursorInfo.word === 'ASSEDVIVO') 
+	   {return { contents: 'Informazioni sullo stato dell`asse D vivo.'}}	
+	   else if (cursorInfo.word === 'QUOTAXRIL') 
+	   {return { contents: 'Quota Asse X attuale riferita allo zero rilevatore'}}	
+	   else if (cursorInfo.word === 'QUOTAYRIL') 
+	   {return { contents: 'Quota Asse Y attuale riferita allo zero rilevatore'}}	
+	   else if (cursorInfo.word === 'QUOTAZRIL') 
+	   {return { contents: 'Quota Asse Z attuale riferita allo zero rilevatore'}}	
+	   else if (cursorInfo.word === 'QUOTAARIL') 
+	   {return { contents: 'Quota Asse A attuale riferita allo zero rilevatore'}}	
+	   else if (cursorInfo.word === 'QUOTACRIL') 
+	   {return { contents: 'Quota Asse C attuale riferita allo zero rilevatore'}}	
+	   else if (cursorInfo.word === 'QUOTADRIL') 
+	   {return { contents: 'Quota Asse D attuale riferita allo zero rilevatore'}}	
+	   else if (cursorInfo.word === 'HOLDMSG') 
+	   {return { contents: 'Messagio di HOLD in corso sul CNC'}}	
+	   else if (cursorInfo.word === 'STOPMSG') 
+	   {return { contents: 'Messagio di STOP in corso sul CNC'}}	
+	   else if (cursorInfo.word === 'ALARMMSG') 
+	   {return { contents: 'Messagio di ALARM in corso sul CNC'}}	
+	   
 	   else 
 	   {return {contents: ''}}
 	});

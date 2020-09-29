@@ -1,19 +1,19 @@
 {
 	"name": "ml-edit",
-   "displayName": "ML Edit",
+	"displayName": "ML Edit",
 	"description": "Ml Edit Language for CNC",
 	"author": "Pitamorsi Francesco",
 	"license": "MIT",
 	"version": "1.1.0",
-   "icon": "./icon/logo.png",
+	"icon": "./icon/logo.png",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Pitax/ML_Edit"
 	},
 	"publisher": "Pitamorsi",
-    "categories": [
-        "Programming Languages"
-    ],
+	"categories": [
+		"Programming Languages"
+	],
 	"keywords": [
 		"multi-root ready"
 	],
@@ -24,10 +24,8 @@
 		"onLanguage:ml"
 	],
 	"main": "./client/out/extension",
-	"contributes": 
-	{
-		"configuration": 
-		{
+	"contributes": {
+		"configuration": {
 			"type": "object",
 			"title": "ML Edit",
 			"properties": {
@@ -50,24 +48,32 @@
 				}
 			}
 		},
-		"languages": 
-		[{
-            "id": "ml",
-            "aliases": ["ML", "ml"],
-            "extensions": [".ml"],
-            "configuration": "./language-configuration.json"
-        }],
-		"grammars": 
-		[{
-            "language": "ml",
-            "scopeName": "source.ml",
-            "path": "./syntaxes/ml.tmLanguage.json"
-		}],
-		"snippets": 
-		[{
-                "language": "ml",
-                "path": "./snippets/snippets.code-snippets"
-        }]
+		"languages": [
+			{
+				"id": "ml",
+				"aliases": [
+					"ML",
+					"ml"
+				],
+				"extensions": [
+					".ml"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "ml",
+				"scopeName": "source.ml",
+				"path": "./syntaxes/ml.tmLanguage.json"
+			}
+		],
+		"snippets": [
+			{
+				"language": "ml",
+				"path": "./snippets/snippets.code-snippets"
+			}
+		]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",

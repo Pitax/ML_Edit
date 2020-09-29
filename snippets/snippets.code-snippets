@@ -61,5 +61,33 @@
 		  "HHMOTREF[${1:nlog}]"
 		],
 		"description": "Contiene il riferimento Asse Nlog"
-	  }
+	  },
+	  "GGSK": {
+		"prefix": "GGSK",
+		"body": [
+		  "GGSK[MENU${1:NUM}].F${2:TASTO}"
+		],
+		"description": "Stato pressione SOFTKEYS"
+	  },
+	  "PRESS": {
+		"prefix": "PRESS",
+		"body": [
+		  "PRESS[${1:STRINGA}],0)"
+		],
+		"description": "Invia String MDI"
+	},
+	  "WORD8U": {
+		"prefix": "WORD8U",
+		"body": [
+		  "{(WORD8U and 0xFFFF) = 0x${1:VALOREMC}}"
+		],
+		"description": "Invia String MDI"
+	},
+	"CNCNEWMC": {
+	  "prefix": "CNCNEWMC",
+	  "body": [
+		"CNCNEWMC and {(WORD8U and 0xFFFF) = 0x${1:VALOREMC}}"
+	  ],
+	  "description": "Invia String MDI"
+  }
 }
