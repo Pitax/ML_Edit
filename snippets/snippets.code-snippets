@@ -54,5 +54,12 @@
 		  "ZZPAL(${1:valore512})"
 		],
 		"description": "Stringa corrispondente all'array di ppg da PAL[0] a PAL[512] dedicato alla comunicazione con il plc."
+	  },
+	  "HHMOTREF": {
+		"prefix": "HHMOTREF",
+		"body": [
+		  "HHMOTREF[${1:nlog}]"
+		],
+		"description": "Contiene il riferimento Asse Nlog"
 	  }
 }

@@ -12,7 +12,7 @@ import {
 	CompletionItemKind,
 	TextDocumentPositionParams,
 	TextDocumentSyncKind,
-	InitializeResult, Range
+	InitializeResult, Range, createClientPipeTransport
 } from 'vscode-languageserver';
 
 import {
@@ -26,11 +26,11 @@ const getCursorInfo = (
 	start: number,
 	end: number
   ): CursorInfo => {
-	while (start >= 0 && /[a-zA-Z0-9_#@]/.test(text[start])) {
+	while (start >= 0 && /[a-zA-Z0-9_@]/.test(text[start])) {
 	  start--
 	}
   
-	while (end < text.length && /[a-zA-Z0-9_(]/.test(text[end])) {
+	while (end < text.length && /[a-zA-Z0-9_]/.test(text[end])) {
 	  end++
   
 	  if (text.substr(end - 1, 1) === '(') {
@@ -264,10 +264,51 @@ connection.onCompletion(
 		// which code complete got requested. For the example we ignore this
 		// info and always provide the same completion items.
 		return [
-			//Funzioni
-		// 	{label: '', kind: CompletionItemKind.Text},
-		// 	{label: 'HHALARM', kind: CompletionItemKind.Function, detail: 'prova', data: 1},
-		//  {label: 'ABS', kind: CompletionItemKind.Function, data: 1	},	   
+		//Variabili verso il CNC Zona E
+		{label: 'STARTCNC', kind: CompletionItemKind.Field, detail:'START verso CNC'},
+		{label: 'STOPCNC', kind: CompletionItemKind.Field, detail:'STOP verso CNC'},
+		{label: 'JOGPCNC', kind: CompletionItemKind.Field, detail:'JOG Pos verso CNC'},
+		{label: 'JOGNCNC', kind: CompletionItemKind.Field, detail:'Jog Neg verso CNC'},
+		{label: 'RESETCNC', kind: CompletionItemKind.Field, detail:'RESET verso CNC'},
+		{label: 'OVRFEED', kind: CompletionItemKind.Class, detail:'Override G1 G2 G3'},
+		{label: 'OVRSPEED', kind: CompletionItemKind.Class, detail:'Override Speed'},
+		{label: 'MOTOM', kind: CompletionItemKind.Field, detail:'Avvio Moto Mandrino'},
+		{label: 'POSM', kind: CompletionItemKind.Field, detail:'Avvio Pos. Mandrino'},
+		{label: 'SMAN', kind: CompletionItemKind.Field, detail:'Cambia Senso Rot. Mandrino'},
+		{label: 'FATTO', kind: CompletionItemKind.Field, detail:'Continua dopo M'},
+		{label: 'OVRRAP', kind: CompletionItemKind.Class, detail:'Override G0'},
+		//Variabili dal CNC Zona U
+		{label: 'CNCSTR', kind: CompletionItemKind.Function, detail:'START dal CNC'},
+		{label: 'CNCNOALL', kind: CompletionItemKind.Function, detail:'Nessun Allarme dal CNC'},
+		{label: 'CNCRST', kind: CompletionItemKind.Function, detail:'RESET dal CNC'},
+		{label: 'CNCNEWM', kind: CompletionItemKind.Function, detail:'Nuova Funzione M dal CNC'},
+		{label: 'BLOC', kind: CompletionItemKind.Function, detail:'STOP dal CNC'},
+		{label: 'CNCAJOGP', kind: CompletionItemKind.Function, detail:'Asse in JOG Pos dal CNC'},
+		{label: 'CNCAJOGN', kind: CompletionItemKind.Function, detail:'Asse in JOG neg dal CNC'},
+		{label: 'CNCUTEST', kind: CompletionItemKind.Function, detail:'Tratatura in Corso dal CNC'},
+		{label: 'CNCMOVAX', kind: CompletionItemKind.Function, detail:'Sblocco Asse dal CNC'},
+		{label: 'TB', kind: CompletionItemKind.Function, detail:'Posto UT Programmato'},
+		{label: 'TA', kind: CompletionItemKind.Function, detail:'Posto UT Mandrino'},
+		{label: 'M5', kind: CompletionItemKind.Function, detail:'Stop Mandrino dal CNC'},
+		{label: 'M19', kind: CompletionItemKind.Function, detail:'Posizionamento Mandrino dal CNC'},
+		{label: 'M7', kind: CompletionItemKind.Function, detail:'Refrigerante 1 dal CNC'},
+		{label: 'M8', kind: CompletionItemKind.Function, detail:'Refrigerante 2 dal CNC'},
+		{label: 'RMOTOM', kind: CompletionItemKind.Function, detail:'Rich. Moto MND dal CNC'},
+		{label: 'MRAMP', kind: CompletionItemKind.Function, detail:'MDN in Rampa'},
+		{label: 'MANDINMOTO', kind: CompletionItemKind.Function, detail:'MND in Moto'},
+		{label: 'MANDVELOK', kind: CompletionItemKind.Function, detail:'MND Velocita OK'},
+		//Aiuti vari CNC
+		{label: 'Module 24', kind: CompletionItemKind.Interface, detail:'Modulo 24ms'},
+		{label: 'Module 2', kind: CompletionItemKind.Interface, detail:'Modulo 2ms'},
+		{label: 'End Module', kind: CompletionItemKind.Interface, detail:'Modulo 2ms'},
+		{label: 'Function', kind: CompletionItemKind.Interface, detail:'Inzio Funzione'},
+		{label: 'End Function', kind: CompletionItemKind.Interface, detail:'Fine Funzione'},
+		{label: 'Include', kind: CompletionItemKind.Interface, detail:'Includi File'},
+		{label: 'if', kind: CompletionItemKind.Interface, detail:'Inizio if'},
+		{label: 'elseif', kind: CompletionItemKind.Interface, detail:'Funzione elsif'},
+		{label: 'end if', kind: CompletionItemKind.Interface, detail:'Fine if'},
+		{label: 'and', kind: CompletionItemKind.Interface, detail:'and'},
+		{label: 'or', kind: CompletionItemKind.Interface, detail:'or'},
 		];
 	}
 );
@@ -322,7 +363,6 @@ connection.onHover(
 	   {return { contents: 'Stato di attivazione delle uscite dedicate ai freni motore (o di utilizzo generico).'}}
 	   else if (cursorInfo.word === 'HHMOTREF') 
 	   {return { contents: 'Contiene il riferimento comandato dal CN agli azionamenti, espresso in giri/min.'}}	
-
 	   //Funzioni	   
 	   else if (cursorInfo.word === 'GGAD') 
 	   {return { contents: 'Valore degli ingressi analogici allo Z-Link.'}}
@@ -340,7 +380,6 @@ connection.onHover(
 	   {return { contents: 'La funzione consente di generare un riferimento, analogico o digitale, applicando un incremento.\n\rriferim = Valore del riferimento in uscita (+- 27594 max).\n\rnumout = Numero del canale di uscita su cui generare il riferimento:\n\rda 0 a 15 scrittura nell`area T dello Z-Link\n\rda 16 a 31 riferimenti analogici Z-Link\n\rda 32 a 63 scrittura da ZZLINK[160] a ZZLINK[191]\n\rda 64 a 79 scrittura nell`area S dello Z-Link\n\rda 80 a 96 scrittura da ZZLINK[208] a ZZLINK[224]\n\rda 100 a 114 numero asse ZSER (per assi da 0S a 14S)\n\rda 200 a 231 numero asse Z-STAR (per assi da 0H a 31H)\n\rda 300 a 315 numero asse Mechatrolink (per assi da 0M a 15M)\n\rincremento = Incremento del riferimento (valore assoluto sempre positivo)\n\r'}}	
 	   else if (cursorInfo.word === 'WRPRM') 
 	   {return { contents: 'Consente di accedere in scrittura nell`array di parametri permanenti non di processo, con formato string long PRM[8192].'}}
-
 	   //Variabili ZZ
 	   else if (cursorInfo.word === 'ZZSTATOTAS') 
 	   {return { contents: 'Contiene informazioni sullo stato della tastiera ed in generale sull`attività in corso in Z32.'}}
@@ -370,42 +409,198 @@ connection.onHover(
 	   {return { contents: 'Fornisce il numero dell`utensile attivo, ossia lo stesso valore che la G104 di part-program restituisce in HX.'}}	
 	   else if (cursorInfo.word === 'ZZMDIJOGFILE') 
 	   {return { contents: 'Contiene il numero del file CMOS associato al bit di ZZMDIJOGMAP.'}}	
-	   //Variabili della memoria diSistema	   
+	   //Variabili della memoria di Sistema	Verso il CNC   
 	   else if (cursorInfo.word === 'STARTCNC') 
-	   {return { contents: '0E0'}}	
+	   {return { contents: 'Bit 0E0 - Richiesta si START'}}	
 	   else if (cursorInfo.word === 'STOPCNC') 
-	   {return { contents: ''}}	
+	   {return { contents: 'Bit 0E1 - Richiesta di STOP'}}	
 	   else if (cursorInfo.word === 'JOGPCNC') 
-	   {return { contents: ''}}	
+	   {return { contents: 'Bit 0E2 - Richiesta di JOG Positivo'}}	
 	   else if (cursorInfo.word === 'JOGNCNC') 
-	   {return { contents: ''}}	
+	   {return { contents: 'Bit 0E3 - Richiesta di JOG Negativo'}}	
 	   else if (cursorInfo.word === 'OPRCNC') 
-	   {return { contents: ''}}	
+	   {return { contents: 'Bit 0E4 - Richiesta di Trasferire i Comandi a Operatore'}}	
 	   else if (cursorInfo.word === 'BSINCNC') 
-	   {return { contents: ''}}	
+	   {return { contents: 'Bit 0E5 - Richiesta di Fermarsi alla fine del Blocco in Corso'}}	
 	   else if (cursorInfo.word === 'ETESTCNC') 
-	   {return { contents: ''}}	
+	   {return { contents: 'Bit 0E6 - Richiesta ciclo di Test, Ridurre il Rapido a 1/5'}}	
 	   else if (cursorInfo.word === 'FHOLDCNC') 
-	   {return { contents: ''}}	
+	   {return { contents: 'Bit 0E7 - Richiesta di FEED HOLD'}}	
 	   else if (cursorInfo.word === 'CONSM1CNC') 
-	   {return { contents: ''}}	
+	   {return { contents: 'Bit 0E8 - Abilita lo stop del Programma quando si incontra M1'}}	
 	   else if (cursorInfo.word === 'RESETCNC') 
-	   {return { contents: ''}}	
+	   {return { contents: 'Bit 0E9 - Richiesta di RESET'}}	
 	   else if (cursorInfo.word === 'OPZCNC') 
-	   {return { contents: ''}}	
+	   {return { contents: 'Bit 0EA - Richiesta di Blocco Opzionale'}}	
 	   else if (cursorInfo.word === 'CONGELACNC') 
-	   {return { contents: ''}}	
+	   {return { contents: 'Bit 0EB - Richiesta di congelare la tastira'}}	
 	   else if (cursorInfo.word === 'MOTOSTOPCNC') 
-	   {return { contents: ''}}	
+	   {return { contents: 'Bit 0EC - Richiesta di Stop in Traiettoria durante G62'}}	
 	   else if (cursorInfo.word === 'OVRFEED') 
-	   {return { contents: ''}}	
+	   {return { contents: 'Byte 1E Low - Override Feed (Non funziona sui blocchi G0)'}}	
 	   else if (cursorInfo.word === 'OVRSPEED') 
-	   {return { contents: ''}}	
+	   {return { contents: 'Byte 1E High - Override Speed'}}	
+	   else if (cursorInfo.word === 'MOTOM') 
+	   {return { contents: 'Bit 3E0 - Richista di Moto mandrino'}}	
+	   else if (cursorInfo.word === 'POSM') 
+	   {return { contents: 'Bit 3E1 - Richista di Posizionamento Mandrino'}}	
+	   else if (cursorInfo.word === 'GAM1') 
+	   {return { contents: 'Bit 1EH - Richista di Utilizzo Gamma Meccanica 2'}}	
+	   else if (cursorInfo.word === 'MX1') 
+	   {return { contents: 'Bit 3E4 - Richista di Moto Asse Indexato nLog 14'}}	
+	   else if (cursorInfo.word === 'PSX1') 
+	   {return { contents: 'Bit 3E5 - Richista di Posizionamento Asse Indexato nLog 14'}}	
+	   else if (cursorInfo.word === 'MX2') 
+	   {return { contents: 'Bit 3E6 - Richista di Moto Asse Indexato nLog 13'}}	
+	   else if (cursorInfo.word === 'PSX2') 
+	   {return { contents: 'Bit 3E7 - Richista di Moto Asse Indexato nLog 13'}}	
+	   else if (cursorInfo.word === 'SMAN') 
+	   {return { contents: 'Bit 4EF - Invio Senso di Rotazione Mandrino 0=oraria 1=antioraria'}}	
+	   else if (cursorInfo.word === 'DRYRUN') 
+	   {return { contents: 'Bit 7E3 - Obsoleta sostuita con ZZDRYRUN.'}}	
+	   else if (cursorInfo.word === 'FATTO') 
+	   {return { contents: 'Bit 7E4 - Invio il Comando di proseguire dopo funzione ausiliaria (FAN)'}}	
+	   else if (cursorInfo.word === 'MISLOG') 
+	   {return { contents: 'Bit 7E7 - Ferma la rotazione dei messaggi di logica'}}	
+	   else if (cursorInfo.word === 'MISURA') 
+	   {return { contents: 'Bit 7E8 - Invia l`informazione di contatto durante ciclo di misura'}}	
+	   else if (cursorInfo.word === 'M19SI') 
+	   {return { contents: 'Bit 7E9 - Richeide l`invio di M19 anche non decodificata'}}	
+	   else if (cursorInfo.word === 'SBINARIO') 
+	   {return { contents: 'Bit 7EA - Abilita la S dalla WORD 4E in binario'}}	
+	   else if (cursorInfo.word === 'TASTIMIS') 
+	   {return { contents: 'Bit 7EC - Presenza Del tastatore analogico - Ignora il valore del bit in taratura'}}	
+	   else if (cursorInfo.word === 'CAMMES') 
+	   {return { contents: 'Bit 7ED - Abilita Interpolazione per Camme cilindriche'}}	
+	   else if (cursorInfo.word === 'MICROZER') 
+	   {return { contents: 'Bit 7EE - Inibisce l`entrata del micro di zero'}}
+	   else if (cursorInfo.word === 'ESCMDI') 
+	   {return { contents: 'Bit 7EF - Impesice l`interruzione del funzionamento MDI con ESC'}}
+	   else if (cursorInfo.word === 'OVRRAP') 
+	   {return { contents: 'Bit 7EF - Override Rapido Agisce su G0 con TEST attivo'}}
+	   ///Variabili della memoria di Sistema Dal CNC  
+	   else if (cursorInfo.word === 'CNCESEC') 
+	   {return { contents: 'Bit 0U0 - Esecuzione programma in Corso'}}
+	   else if (cursorInfo.word === 'CNCSTR') 
+	   {return { contents: 'Bit 0U1 - Operazione con START selezionato'}}
+	   else if (cursorInfo.word === 'CNCPRNT') 
+	   {return { contents: 'Bit 0U2 - Operazione in Attesa di START'}}
+	   else if (cursorInfo.word === 'CNCNOALL') 
+	   {return { contents: 'Bit 0U3 - Nessun Allarme Presente'}}	
+	   else if (cursorInfo.word === 'CNCRST') 
+	   {return { contents: 'Bit 0U4 - Richiesta di RESET dal CNC'}}	
+	   else if (cursorInfo.word === 'FAN') 
+	   {return { contents: 'Bit 0U5 - Nuova Funzione Ausiliaria (M, MA, MB, MC, S, T)'}}	
+	   else if (cursorInfo.word === 'CNCNEWM') 
+	   {return { contents: 'Bit 0U6 - Nuova Funzione M'}}	
+	   else if (cursorInfo.word === 'CNCNEWMA') 
+	   {return { contents: 'Bit 0U7 - Nuova Funzione MA'}}	
+	   else if (cursorInfo.word === 'CNCNEWMB') 
+	   {return { contents: 'Bit 0U8 - Nuova Funzione MB'}}	
+	   else if (cursorInfo.word === 'CNCNEWMC') 
+	   {return { contents: 'Bit 0U9 - Nuova Funzione MC'}}	
+	   else if (cursorInfo.word === 'NS') 
+	   {return { contents: 'Bit 0UA - Nuova Funzione S'}}	
+	   else if (cursorInfo.word === 'RICBLOC') 
+	   {return { contents: 'Bit 0UC - Ricerca Blocco in Corso'}}	
+	   else if (cursorInfo.word === 'CNCSEMIAUTO') 
+	   {return { contents: 'Bit 0UE - Operazione Semiautomatica in Corso'}}	
+	   else if (cursorInfo.word === 'BLOC') 
+	   {return { contents: 'Bit 0UF - Operazione Bloccata da STOP'}}	
+	   else if (cursorInfo.word === 'CNCG84') 
+	   {return { contents: 'Bit 1U0 - Maschiatura in Corso'}}	
+	   else if (cursorInfo.word === 'CNCG61') 
+	   {return { contents: 'Bit 1U1 - Movimento in G61'}}	
+	   else if (cursorInfo.word === 'CNCG62') 
+	   {return { contents: 'Bit 1U2 - Movimento in G62'}}	
+	   else if (cursorInfo.word === 'CNCG63') 
+	   {return { contents: 'Bit 1U3 - Filettatura in Corso'}}	
+	   else if (cursorInfo.word === 'CNCASTZ') 
+	   {return { contents: 'Bit 1U4 - Tutti gli Assi sono Fermi'}}	
+	   else if (cursorInfo.word === 'CNCALAV') 
+	   {return { contents: 'Bit 1U5 - Gli assi sono in Lavoro con G1 G2 G3'}}	
+	   else if (cursorInfo.word === 'CNCAJOGP') 
+	   {return { contents: 'Bit 1U6 - Assi in JOG Positivo'}}	
+	   else if (cursorInfo.word === 'CNCAJOGN') 
+	   {return { contents: 'Bit 1U7 - Assi in JOG Negativo'}}	
+	   else if (cursorInfo.word === 'CNCUTEST') 
+	   {return { contents: 'Bit 1U8 - Zero o Taratura Automatico in Corso'}}	
+	   else if (cursorInfo.word === 'CNCDATI') 
+	   {return { contents: 'Bit 1U9 - Programma di trasmissione datin in corso'}}	
+	   else if (cursorInfo.word === 'CNCDNC') 
+	   {return { contents: 'Bit 1UA - Programma con calcolatore esterno'}}	
+	   else if (cursorInfo.word === 'INVMAN') 
+	   {return { contents: 'Bit 1UB - Ritorno da maschiatura rapida'}}	
+	   else if (cursorInfo.word === 'CNCJOG') 
+	   {return { contents: 'Bit 1UC - Attività di JOG in corso'}}	
+	   else if (cursorInfo.word === 'CNCG39') 
+	   {return { contents: 'Bit 1UD - Sospensione del ciclo i cambio utensile'}}	
+	   else if (cursorInfo.word === 'CNCMOVAX0') 
+	   {return { contents: 'Bit 2U0 - Sblocco Asse nlog 0'}}	
+	   else if (cursorInfo.word === 'CNCMOVAX1') 
+	   {return { contents: 'Bit 2U1 - Sblocco Asse nlog 1'}}	
+	   else if (cursorInfo.word === 'CNCMOVAX2') 
+	   {return { contents: 'Bit 2U2 - Sblocco Asse nlog 2'}}	
+	   else if (cursorInfo.word === 'CNCMOVAX3') 
+	   {return { contents: 'Bit 2U3 - Sblocco Asse nlog 3'}}	
+	   else if (cursorInfo.word === 'CNCMOVAX4') 
+	   {return { contents: 'Bit 2U4 - Sblocco Asse nlog 4'}}	
+	   else if (cursorInfo.word === 'CNCMOVAX5') 
+	   {return { contents: 'Bit 2U5 - Sblocco Asse nlog 5'}}	
+	   else if (cursorInfo.word === 'CNCMOVAX6') 
+	   {return { contents: 'Bit 2U6 - Sblocco Asse nlog 6'}}	
+	   else if (cursorInfo.word === 'CNCMOVAX7') 
+	   {return { contents: 'Bit 2U7 - Sblocco Asse nlog 7'}}	
+	   else if (cursorInfo.word === 'CNCMOVAX15') 
+	   {return { contents: 'Bit 2UF - Sblocco Asse nlog 15'}}	
+	   else if (cursorInfo.word === 'TB') 
+	   {return { contents: 'Bit 3UL - Posto Utensile Programmato'}}	
+	   else if (cursorInfo.word === 'TA') 
+	   {return { contents: 'Bit 3UH - Posto utensile Mandrino'}}	
+	   else if (cursorInfo.word === 'WORD5UL') 
+	   {return { contents: 'Bit 5UL - Codice M Programmato'}}	
+	   else if (cursorInfo.word === 'M5') 
+	   {return { contents: 'Bit 5U8 - STOP Mandrino'}}	
+	   else if (cursorInfo.word === 'M19') 
+	   {return { contents: 'Bit 5U9 - Posizionamento Mandrino'}}
+	   else if (cursorInfo.word === 'M7') 
+	   {return { contents: 'Bit 5UA - Eroga Refrigerante 1'}}	
+	   else if (cursorInfo.word === 'M8') 
+	   {return { contents: 'Bit 5UB - Eroga Refrigerante 2'}}	
+	   else if (cursorInfo.word === 'SPRGM') 
+	   {return { contents: 'Bit 5UC - Sottoprogramma Speciale in Corso'}}	
+	   else if (cursorInfo.word === 'RMOTOM') 
+	   {return { contents: 'Bit 5UD - Richiesta Moto Mandrino M3 o M4'}}		
+	   else if (cursorInfo.word === 'MMIN') 
+	   {return { contents: 'Bit 5UE - Velocità di taglio costante in corso'}}	
+	   else if (cursorInfo.word === 'WORD8U') 
+	   {return { contents: 'Word 8U - Word Assi Con Zeri in Corso'}}	
+	   else if (cursorInfo.word === 'CNCZEROAX0') 
+	   {return { contents: 'Bit 9U0 - Zero in Corso Asse nLog 0'}}	
+	   else if (cursorInfo.word === 'CNCZEROAX1') 
+	   {return { contents: 'Bit 9U1 - Zero in Corso Asse nLog 1'}}	
+	   else if (cursorInfo.word === 'CNCZEROAX2') 
+	   {return { contents: 'Bit 9U2 - Zero in Corso Asse nLog 2'}}	
+	   else if (cursorInfo.word === 'CNCZEROAX3') 
+	   {return { contents: 'Bit 9U3 - Zero in Corso Asse nLog 3'}}	
+	   else if (cursorInfo.word === 'CNCZEROAX4') 
+	   {return { contents: 'Bit 9U4 - Zero in Corso Asse nLog 4'}}	
+	   else if (cursorInfo.word === 'CNCZEROAX5') 
+	   {return { contents: 'Bit 9U5 - Zero in Corso Asse nLog 5'}}	
+	   else if (cursorInfo.word === 'CNCZEROAX6') 
+	   {return { contents: 'Bit 9U6 - Zero in Corso Asse nLog 6'}}	
+	   else if (cursorInfo.word === 'CNCZEROAX7') 
+	   {return { contents: 'Bit 9U7 - Zero in Corso Asse nLog 7'}}	
+	   else if (cursorInfo.word === 'MRAMP') 
+	   {return { contents: 'Bit EU4 - Mandrino in Rampa'}}	
+	   else if (cursorInfo.word === 'MANDINMOTO') 
+	   {return { contents: 'Bit EUB - Mandrino in Moto'}}	
+	   else if (cursorInfo.word === 'MANDVELOK') 
+	   {return { contents: 'Bit EUC - Mandrino a velocità richiesta'}}	
 	   else 
 	   {return {contents: ''}}
 	});
   
-
 // Make the text document manager listen on the connection
 // for open, change and close text document events
 documents.listen(connection);
