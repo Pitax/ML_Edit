@@ -460,7 +460,11 @@ connection.onHover(
 		{return { contents: 'Word per la gestione evoluta dei messagi.\r\nbit 0: Messagio di HOLD in corso\r\nbit 1: Messagio di STOP in corso\r\nbit 2: Messagio di ALARM in corso'}}
 		else if (cursorInfo.word === 'ZZORGSUP') 
 		{return { contents: 'Ogni elemento della stringa esprime, in millesimi di unità visualizzata, un offset che viene sommato all`origine supplementare contenuta nel file 126.'}}	
-	  	 //Variabili della memoria di Sistema	Verso il CNC   
+		else if (cursorInfo.word === 'ZZSAUXE') 
+		{return { contents: 'Contiene i dati forniti dal PLC al CN per la gestione di un secondo mandrino ausiliario sullo stesso processo\n\rZZSAUXE[0].0 = 1 Mandrino Principale\n\rZZSAUXE[0].1 = 1 Mandrino Ausiliario\n\rZZSAUXE[1] = Riferimento di velocità del mandrino Principale.\n\rZZSAUXE[2] = Riferimento di velocità del mandrino Ausiliario'}}		   
+		else if (cursorInfo.word === 'ZZSAUXU') 
+		{return { contents: 'Contiene i dati forniti dal CN al PLC per la gestione di un secondo mandrino ausiliario sullo stesso processo.\n\rZZSAUXU[0].0 = 1 Mantiene Mandrino Principale Attivo\n\rZZSAUXU[0].1 = 1 Mantiene Mandrino Ausiliario Attivo\n\rZZSAUXU[1] = Riferimento di velocità del mandrino Principale.\n\rZZSAUXU[2] = Riferimento di velocità del mandrino Ausiliarion\rZZSAUXU[3] = Numero Mandrino Attivo'}}	
+		//Variabili della memoria di Sistema	Verso il CNC   
 		else if (cursorInfo.word === 'STARTCNC' || cursorInfo.word === '0E0') 
 		{return { contents: 'Bit 0E0 - Richiesta si START'}}	
 		else if (cursorInfo.word === 'STOPCNC' || cursorInfo.word === '0E1') 
