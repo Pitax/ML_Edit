@@ -350,8 +350,8 @@ connection.onCompletion(
 // the completion list.
 connection.onCompletionResolve(
 	(item: CompletionItem): CompletionItem => {
-		if (item.data === 1) {item.detail = 'Contiene gli allarmi diagnosticati dall’azionamento digitale  che  provocano  l’arresto immediato del moto';
-			item.documentation = ('Bit0 : Allarme protezione termica it del motore\n\r Bit 1: Allarme sovratemperatura azionamento');
+		if (item.data === 1) {item.detail = 'Testo 1';
+			item.documentation = ('Testo 2');
 		} else if (item.data === 2) {
 			item.detail = 'Variabili ZSTAR';
 			item.documentation = 'CNC Documentation';
