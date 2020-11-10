@@ -68,7 +68,8 @@
 			"patterns":
 			[{
 				"name": "entity.name.function.ml",
-				"match": "\\b(giallo chiaro)\\b"
+				"begin": "@#\\d",
+				"end": "\\d*"
 			},
 			{
 				"name": "entity.name.tag.ml",
