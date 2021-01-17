@@ -768,6 +768,95 @@ connection.onHover(
 			{return { contents: 'Riferimento Comando Velocità Mandrino Ausiliario'}}	
 		else if (cursorInfo.word === 'AUSSPEEDPROG') 
 			{return { contents: 'Riferimento del CNC Velocità Mandrino Ausiliario'}}	
+		//Variabili modulo DEM
+		else if (cursorInfo.word === 'CCSPIENAUX')
+			{return { contents: 'Mappa a bit per processo di segnale per abilitazione alla coppia per il mandrino ausiliario..\n\rDopo la funzione FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCSPIENPRI')
+			{return { contents: 'Mappa a bit per processo di segnale per abilitazione alla coppia per il mandrino principale.\n\rDopo la funzione FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCSPEEDERR')
+			{return { contents: 'La variabile contiene il valore % utilizzato per il calcolo dell’errore di inseguimento tollerato in rpm per il mandrino attivo sul processo.\n\rPrima la funzione FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCHOLDSPI')
+			{return { contents: 'La  variabile  contiene  bit  di  segnalazione  per  specifiche  condizioni  mandrino  che  l’utente  puó ulizzare per impostare un HOLD di macchina (bit 0E7).\n\rDopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCZEROSEQ')
+			{return { contents: 'Numero di sequenza attiva durante un ciclo di orientamento mandrino.\n\rDopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CC3E1')
+			{return { contents: 'Mappa a bit dei processi con comando di posizionamento mandrino attivo.\n\rDopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CC3E0')
+			{return { contents: 'Mappa a bit dei processi con comando di moto mandrino attivo.\n\rDopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCSPEED')
+			{return { contents: 'Valore della speed in rpm proposta dal modulo DEM.ML.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCZEROSPEED')
+			{return { contents: 'Valore della speed in rpm con cui il modulo DEM.ML esegue la ripresa di zero mandrino.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCSPICONFIG')
+			{return { contents: 'Mappe a bit per la configurazione di specifici comportamenti del mandrino.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCHHZERO')
+			{return { contents: 'Mappe per numero logico degli assi per i quali non è stato eseguito lo zero elettrico del corrispettivo motore.\n\rDopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCDIFFUNBLK')
+			{return { contents: 'Mappe per numero logico degli assi per i quali è stata richiesta una  procedura di sblocco ma sono ancora in attesa del consenso esterno per poterla avviare.\n\rDopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCDIFFBLK')
+			{return { contents: 'Mappe per numero logico degli assi per i quali e’ stata richiesta una procedura di blocco ma sono ancora in attesa del consenso esterno per poterla avviare.\n\rDopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCDRVDIFF')
+			{return { contents: 'Mappe per numero logico degli assi con stato del drive non allineato alla richiesta di coppia.\n\rDopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCDRVAXALARM')
+			{return { contents: 'Mappe per numero logico di asse in allarme.\n\rDopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCDRVFORCEOFF')
+			{return { contents: 'Mappa a bit per numero logico dei drive richiesti OFF da plc.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCDRVFORCEON[')
+			{return { contents: 'Mappa a bit per numero logico dei drive richiesti ON da plc.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCDRVCONSBLK')
+			{return { contents: 'Mappe per numero logico dei consensi esterni per avviare una procedura di blocco di un asse.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCDRVBLK')
+			{return { contents: 'Mappe per numero logico degli assi per i quali è stata richiesta una procedura di blocco asse.\n\rDopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCDRVTOFFP0')
+			{return { contents: 'Tempi in ms per ogni asse del Processo, della durata della procedura di blocco.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCDRVCONSUNBLK')
+			{return { contents: 'Mappe per numero logico dei consensi esterni per avviare una procedura di sblocco di un asse.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCDRVUNBLK')
+			{return { contents: 'Mappe per numero logico degli assi per i quali è stata richiesta una procedura di sblocco asse.\n\rDopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCDRVBRAKE')
+			{return { contents: 'Mappe per numero logico dei comandi per i freni.\n\rDopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCDRVTONP')
+			{return { contents: 'Tempi in ms per ogni asse del Processo, della durata della procedura di sblocco.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCHHCONTROL')
+			{return { contents: 'Proposta per la variabile HHCONTROL per il comando della coppia dei drives ZSTAR.\n\rDopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCDRVRDY')
+			{return { contents: 'Mappe per numero logico di drive pronto alla coppia.\n\rSolo Driver Analogici'}}
+		else if (cursorInfo.word === 'CCDRVONREQ')
+			{return { contents: 'Mappe per numero logico delle richieste di assi in coppia.\n\rSolo Driver Analogici'}}
+		else if (cursorInfo.word === 'CCDRVON')
+			{return { contents: 'Mappe per numero logico di drive in coppia.\n\rSolo Driver Analogici'}}
+		else if (cursorInfo.word === 'CCDRVALARM')
+			{return { contents: 'Mappe per numero logico dei drive in allarme.\n\rSolo driver Analogici'}}
+		else if (cursorInfo.word === 'CCDRVCONSEXT')
+			{return { contents: 'Mappe per numero logico di assi che necessitano di un consenso esterno per avviare la procedura di sblocco/blocco asse.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCDRVSRCOFF')
+			{return { contents: 'Mappe per numero logico degli assi a cui togliere coppia in ricerca blocco.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCDRVAXNO')
+			{return { contents: 'Mappe per numero logico degli assi che non devono essere gestiti da questo modulo, ma sono lasciati alla libera gestione da parte del PLC utente.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCBRKVELP')
+			{return { contents: 'Velocità in mm/min per ogni asse del Processo, al di sotto della quale il freno CCDRVBRAKE[nproc].nlog viene attivato durante una procedura di emergenza.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCAXCONFIG')
+			{return { contents: 'Mappe a bit per la configurazione di specifici comportamenti degli assi.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCEMERGG142')
+			{return { contents: 'Mappa a bit dei processi con durata eccessiva di una procedura di Retract G142.\n\rDopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCEMERGDRV')
+			{return { contents: 'Mappa a bit per numero logico, degli assi e/o mandrino con frenata di emergenza in corso.\n\rDopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCEMERG')
+			{return { contents: 'Mappa a bit dei processi con procedura di frenata di emergenza in corso.\n\rDopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCEMERGMEM')
+			{return { contents: 'Mappa a bit dei processi per i quali è terminata la procedura di frenata di emergenza.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCEMERGTSPI')
+			{return { contents: 'Tempo in ms, per ogni processo, della durata della frenata di emergenza per il mandrino attivo.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCEMERGTAX')
+			{return { contents: 'Tempo in ms, per ogni processo, della durata della frenata di emergenza per tutti gli assi in coppia.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCEMERGSET')
+			{return { contents: 'Mappa a bit dei processi sui quali avviare la procedura di frenata di emergenza, comandata da plc.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCRSTALARM')
+			{return { contents: 'Quando questo bit è ad 1, viene comandato il reset degli allarmi ZSTAR per tutti i drives.\n\rDopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCRSTMEM')
+			{return { contents: 'Riarmo della macchina quando CCEMERGMEM va a 1.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCAUXOK')
+			{return { contents: 'Abilitazione del processo a dare coppia.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
 
 		else 
 			{return {contents: ''}}
