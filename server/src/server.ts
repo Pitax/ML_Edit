@@ -801,7 +801,7 @@ connection.onHover(
 			{return { contents: 'Mappe per numero logico di asse in allarme.\n\rDopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
 		else if (cursorInfo.word === 'CCDRVFORCEOFF')
 			{return { contents: 'Mappa a bit per numero logico dei drive richiesti OFF da plc.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
-		else if (cursorInfo.word === 'CCDRVFORCEON[')
+		else if (cursorInfo.word === 'CCDRVFORCEON')
 			{return { contents: 'Mappa a bit per numero logico dei drive richiesti ON da plc.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
 		else if (cursorInfo.word === 'CCDRVCONSBLK')
 			{return { contents: 'Mappe per numero logico dei consensi esterni per avviare una procedura di blocco di un asse.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
@@ -815,7 +815,7 @@ connection.onHover(
 			{return { contents: 'Mappe per numero logico degli assi per i quali è stata richiesta una procedura di sblocco asse.\n\rDopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
 		else if (cursorInfo.word === 'CCDRVBRAKE')
 			{return { contents: 'Mappe per numero logico dei comandi per i freni.\n\rDopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
-		else if (cursorInfo.word === 'CCDRVTONP')
+		else if (cursorInfo.word === 'CCDRVTONP0')
 			{return { contents: 'Tempi in ms per ogni asse del Processo, della durata della procedura di sblocco.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
 		else if (cursorInfo.word === 'CCHHCONTROL')
 			{return { contents: 'Proposta per la variabile HHCONTROL per il comando della coppia dei drives ZSTAR.\n\rDopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
