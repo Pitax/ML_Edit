@@ -789,6 +789,14 @@ connection.onHover(
 			{return { contents: 'Valore della speed in rpm con cui il modulo DEM.ML esegue la ripresa di zero mandrino.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
 		else if (cursorInfo.word === 'CCSPICONFIG')
 			{return { contents: 'Mappe a bit per la configurazione di specifici comportamenti del mandrino.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCSPIJOGS')
+			{return { contents: 'Velocità di rotazione del mandrino attivo quando siamo in JOG, espressa in rpm.\n\Dopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCSPIJOG')
+			{return { contents: 'Mappa a bit dei processi per i quali attualmente il mandrino sta ruotando in JOG.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCSPIJOGP')
+			{return { contents: 'Mappa a bit per processo dei comandi operativi per rotazione mandrino attivo in senso orario mentre siamo in JOG\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'CCSPIJOGN')
+			{return { contents: 'Mappa a bit per processo dei comandi operativi per rotazione mandrino attivo in senso antiorario mentre siamo in JOG\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
 		else if (cursorInfo.word === 'CCHHZERO')
 			{return { contents: 'Mappe per numero logico degli assi per i quali non è stato eseguito lo zero elettrico del corrispettivo motore.\n\rDopo la funzione FFAXENABLE() o FFSPIENABLE()'}}
 		else if (cursorInfo.word === 'CCDIFFUNBLK')
@@ -857,6 +865,21 @@ connection.onHover(
 			{return { contents: 'Riarmo della macchina quando CCEMERGMEM va a 1.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
 		else if (cursorInfo.word === 'CCAUXOK')
 			{return { contents: 'Abilitazione del processo a dare coppia.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+	  	//Variabili modulo HOME
+		else if (cursorInfo.word === 'PPHOME_AXORDER')
+		  {return { contents: 'Ordine sequenza degli assi da azzerare, per numero logico.'}}
+		else if (cursorInfo.word === 'PPHOME_MAPHOME')
+		  {return { contents: 'Mappa temporanea di assi da azzerare.\n\rPrima la funzione FFAXENABLE() o FFSPIENABLE()'}}
+		else if (cursorInfo.word === 'PPHOME_TIME')
+		  {return { contents: 'Tempo di attesa in millisecondi alla fine di ogni azzeramento  prima di proseguire con azzeramento asse successivo'}}
+		else if (cursorInfo.word === 'PPHOME_MAPPOS')
+		  {return { contents: 'Mappa a bit, per numero logico, degli assi per i quali dopo l azzeramento è richiesto il posizionamento alle quote impostate in PPHOME_AXPOS[0-12]'}}
+		else if (cursorInfo.word === 'PPHOME_AXPOS')
+		  {return { contents: 'Quota, in unita visualizzate a cui effettuare il posizionamento assi dopo l azzeramento'}}
+		else if (cursorInfo.word === 'PPHOME_GO')
+		  {return { contents: 'Varibile BIT che abilita la prestazione di homing automatico'}}
+		else if (cursorInfo.word === 'PPHOME_ML')
+		  {return { contents: 'Bit 0 - Richiesta di mantenimento START premuto dalla procedura di homing automatico\n\rBit 1 - Informazione procedura di homing automatico in corso\n\rBit 2 - Informazione procedura di homing automatico in corso con asse in movimento\n\rBit 3 - Informazione procedura di homing automatico terminata con successo'}}
 
 		else 
 			{return {contents: ''}}
