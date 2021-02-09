@@ -51,7 +51,7 @@
 		"ZZPAL": {
 		"prefix": "ZZPAL",
 		"body": [
-			"ZZPAL(${1:valore512})"
+			"ZZPAL(${1:valore_max_512})"
 		],
 		"description": "Stringa corrispondente all'array di ppg da PAL[0] a PAL[512] dedicato alla comunicazione con il plc."
 		},
@@ -93,22 +93,57 @@
 		"FFCOUPLE": {
 		"prefix": "FFCOUPLE",
 		"body": [
-			"FFCOUPLE(${1:nagg},${2:nslave,,${3:pslave},${4:nmast},${5:pmast},${6:qslave,},${7:qmast}"
+			"FFCOUPLE(${1:nagg},${2:nslave},${3:pslave},${4:nmast},${5:pmast},${6:qslave},${7:qmast})"
 		],
 		"description": "Aggancia Assi in Gantry"
 		},
 		"FFUNCOUPLE": {
 		"prefix": "FFUNCOUPLE",
 		"body": [
-			"FFUNCOUPLE(${1:nagg}"
+			"FFUNCOUPLE(${1:nagg})"
 		],
 		"description": "Sgancia Assi in Gantry"
 		},
 		"FFSKCOLOR": {
 		"prefix": "FFSKCOLOR",
 		"body": [
-			"FFSKCOLOR(${1:key},${2:menu,,${3:color},${4:processo}"
+			"FFSKCOLOR(${1:key},${2:menu},${3:color},${4:processo})"
 		],
 		"description": "Colora Softkeys"
+		},
+		"FFWRAX": {
+		"prefix": "FFWRAX",
+		"body": [
+			"FFWRAX(${1:nset},${2:nlogax},${3:nproc})"
+		],
+		"description": "Funzione per applicare un set di tarature ad un ASSE CONTINUO"
+		},
+		"FFWRSPI": {
+		"prefix": "FFWRSPI",
+		"body": [
+			"FFWRSPI(${1:nset},${2:nproc})"
+		],
+		"description": "Funzione per applicare un set di tarature al MANDRINO PRINCIPALE"
+		},
+		"FFRESTAX": {
+		"prefix": "FFRESTAX",
+		"body": [
+			"FFRESTAX(${1:restore},${2:nlogax},${3:nproc})"
+		],
+		"description": "Consente di ripristinare i parametri di taratura per un asse continuo"
+		},
+		"FFRESTSPI": {
+		"prefix": "FFRESTSPI",
+		"body": [
+			"FFRESTSPI(${1:restore},${2:nproc})"
+		],
+		"description": "Consente di ripristinare i parametri di taratura per il mandrino principale"
+		},
+		"FFUPDATEPAR": {
+		"prefix": "FFUPDATEPAR",
+		"body": [
+			"FFUPDATEPAR(${1:nlogax},${2:nchzstar},${3:nproc})"
+		],
+		"description": "Funzione interna utilizzata per fare un refresh dei parametri da mostrare nella pagina del diagnostico per CTP.ML"
   }
 }

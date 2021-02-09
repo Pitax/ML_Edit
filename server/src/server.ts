@@ -880,6 +880,19 @@ connection.onHover(
 		  {return { contents: 'Varibile BIT che abilita la prestazione di homing automatico'}}
 		else if (cursorInfo.word === 'PPHOME_ML')
 		  {return { contents: 'Bit 0 - Richiesta di mantenimento START premuto dalla procedura di homing automatico\n\rBit 1 - Informazione procedura di homing automatico in corso\n\rBit 2 - Informazione procedura di homing automatico in corso con asse in movimento\n\rBit 3 - Informazione procedura di homing automatico terminata con successo'}}
+	  	//Variabili modulo CTP
+		else if (cursorInfo.word === 'FFWRAX')
+		  {return { contents: 'Cambio Taratura Asse Continuo FFWRAX(NumsSet,Nlog,Processo)\n\rNumSet = Numero del set di tarature, da 1 a 20 che si vuole impostare\n\rNlog = Numero logico dell asse, da 0 a 12, su cui impostare il set\n\rProcesso = Numero del processo, da 0 a 5, a cui appartiene l asse'}}
+		else if (cursorInfo.word === 'FFWRSPI')
+		  {return { contents: 'Cambio Taratura Mandrino FFWRSPI(NumSet,Processo)\n\rNumSet = Numero del set di tarature, da 1 a 5 che si vuole impostare\n\rProcesso = Numero del processo, da 0 a 5, a cui appartiene il mandrino'}}
+		else if (cursorInfo.word === 'FFRESTAX')
+		  {return { contents: 'Ripristino Taratura Asse Continuo FFRESTAX(MappaRipristino,Nlog,Processo)\n\rMappaRipristino = Mappa a bit dei parametri da ripristinare\n\rNlog = Numero logico dell asse, da 0 a 12, di cui ripristinare le tarature\n\rProcesso = Numero del processo, da 0 a 5, a cui appartiene l asse'}}
+		else if (cursorInfo.word === 'FFRESTSPI')
+		  {return { contents: 'Ripristino Taratura Mandrino principale FFRESTSPI(MappaRipristino,Processo)\n\rMappaRipristino = Mappa a bit dei parametri da ripristinare per il mandrino\n\rProcesso = Numero del processo, da 0 a 5, a cui appartiene il mandrino'}}
+		else if (cursorInfo.word === 'CCSPISET')
+			{return { contents: '[0]IPROP Guadagno proporzionale maglia di corrente ZSTAR\n\r[1]IINT Guadagno integrale maglia di corrente ZSTAR\n\r[2]VPROP Guadagno proporzionale maglia di velocità ZSTAR\n\r[3]VINT  Guadagno integrale maglia di velocità ZSTAR\n\r[4]IMAX Corrente massima al motore in mAmpere ZSTAR\n\r[5]VMAX Velocità massima dell asse in micron/minuto PROCESSO\n\r[6]VRAP  Velocità di rapido in mm/minuto PROCESSO\n\r[7]ACMAX Accelerazione masisma in mm/sec2 PROCESSO\n\r[8]KV Guadagno proporzionale in sec 1/sec PROCESSO\n\r[9]N  Jerk dell asse PROCESSO'}}
+		else if (cursorInfo.word === 'CCAXSET')
+		  {return { contents: '[0]IPROP Guadagno proporzionale maglia di corrente ZSTAR\n\r[1]IINT Guadagno integrale maglia di corrente ZSTAR\n\r[2]VPROP Guadagno proporzionale maglia di velocità ZSTAR\n\r[3]VINT  Guadagno integrale maglia di velocità ZSTAR\n\r[4]IMAX Corrente massima al motore in mAmpere ZSTAR\n\r[5]Rampa del mandrino in rpm/sec PROCESSO\n\r[6]Jerk per rampa precisa in msec PROCESSO\n\r[7]ACMAX Accelerazione masisma in mm/sec2 PROCESSO\n\r[8]KV Guadagno proporzionale in sec 1/sec PROCESSO\n\r[9]ZZSMAX[0]Limitazione massima Speed Gamma1 in rpm'}}
 
 		else 
 			{return {contents: ''}}
