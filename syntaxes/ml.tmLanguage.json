@@ -59,7 +59,7 @@
 			[
 				{
 					"name": "string.unquoted.ml",
-					"match": "=|<|>|-|\\$|\\*|\\:|\\+|\\b(not|or|and|MESSAGE|RETURN|END DECLARE|TIMED|FUNCTION|TEXT|PERMANENT STRING WORD|PERMANENT STRING BYTE|PERMANENT WORD|PERMANENT BYTE|STRING LONG|STRING WORD|STRING BYTE|LONG|WORD|BYTE|BIT|CONSTANT|TRANSLATE|DECLARE|End Function|Function|if|elseif|else|end if|Module 24|Module 8|Module 2|End Module)\\b"
+					"match": "=|<|>|-|\\$|\\*|\\:|\\+|\\b(not|or|and|MESSAGE|RETURN|END DECLARE|TIMED|FUNCTION|TEXT|PERMANENT STRING WORD|DOUBLE|PERMANENT STRING BYTE|PERMANENT WORD|PERMANENT BYTE|STRING LONG|STRING WORD|STRING BYTE|LONG|WORD|BYTE|BIT|CONSTANT|TRANSLATE|DECLARE|End Function|Function|if|elseif|else|end if|Module 24|Module 8|Module 2|End Module)\\b"
 				}
 			]			
 		},
