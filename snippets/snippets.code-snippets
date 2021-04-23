@@ -145,5 +145,19 @@
 			"FFUPDATEPAR(${1:nlogax},${2:nchzstar},${3:nproc})"
 		],
 		"description": "Funzione interna utilizzata per fare un refresh dei parametri da mostrare nella pagina del diagnostico per CTP.ML"
+		},
+		"FFG28": {
+		"prefix": "FFG28",
+		"body": [
+			"FFG28(${1:nlog},${2:processo})"
+		],
+		"description": "Funzione interna utilizzata per fare un refresh dei parametri da mostrare nella pagina del diagnostico per CTP.ML"
+		},
+		"FFG29": {
+		"prefix": "FFG29",
+		"body": [
+			"FFG29(${1:nlog},${2:processo})"
+		],
+		"description": "Funzione interna utilizzata per fare un refresh dei parametri da mostrare nella pagina del diagnostico per CTP.ML"
   }
 }
