@@ -151,13 +151,48 @@
 		"body": [
 			"FFG28(${1:nlog},${2:processo})"
 		],
-		"description": "Funzione interna utilizzata per fare un refresh dei parametri da mostrare nella pagina del diagnostico per CTP.ML"
+		"description": "Funzione di attivazione asse, rendendolo contrallato dal CN"
 		},
 		"FFG29": {
 		"prefix": "FFG29",
 		"body": [
 			"FFG29(${1:nlog},${2:processo})"
 		],
-		"description": "Funzione interna utilizzata per fare un refresh dei parametri da mostrare nella pagina del diagnostico per CTP.ML"
+		"description": "Funzione di disattivazione asse, rendendolo controllabile dal PLC"
+		},
+		"FFOUTRPM": {
+		"prefix": "FFOUTRPM",
+		"body": [
+			"FFOUTRPM(${1:rpm},${2:ramp,${3:ch)"
+		],
+		"description": "Funzione per generare riferimento in RPM su canale ZSTAR2"
+		},
+		"FFOUTVEL": {
+		"prefix": "FFOUTVEL",
+		"body": [
+			"FFOUTVEL(${1:velocita},${2:accelerazione,${3:numlog,${4:numproc})"
+		],
+		"description": "Funzione per generare riferimento in mm/min su canale ZSTAR2"
+		},
+		"FFOUTVOLT": {
+		"prefix": "FFOUTVOLT",
+		"body": [
+			"FFOUTVOLT(${1:volt},${2:ramp},${3:ch})"
+		],
+		"description": "Funzione per generare un valore -11.5V + 11.5V su canale Z-LINK"
+		},
+		"FFOVRA": {
+		"prefix": "FFOVRA",
+		"body": [
+			"FFOVRA(${1:analog},${2:tipo})"
+		],
+		"description": "Funzione per convertire in valore 0-10V in un valore per feed override"
+		},
+		"FFOUTANALOG": {
+		"prefix": "FFOUTANALOG",
+		"body": [
+			"FFOUTANALOG(${1:valore},${2:canale})"
+		],
+		"description": "Funzione generare un rimerimento analogico tra -12V e +12V su canale Z-LINK"
   }
 }
