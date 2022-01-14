@@ -917,6 +917,32 @@ connection.onHover(
 			{return { contents: '[0]IPROP Guadagno proporzionale maglia di corrente ZSTAR\n\r[1]IINT Guadagno integrale maglia di corrente ZSTAR\n\r[2]VPROP Guadagno proporzionale maglia di velocità ZSTAR\n\r[3]VINT  Guadagno integrale maglia di velocità ZSTAR\n\r[4]IMAX Corrente massima al motore in mAmpere ZSTAR\n\r[5]VMAX Velocità massima dell asse in micron/minuto PROCESSO\n\r[6]VRAP  Velocità di rapido in mm/minuto PROCESSO\n\r[7]ACMAX Accelerazione masisma in mm/sec2 PROCESSO\n\r[8]KV Guadagno proporzionale in sec 1/sec PROCESSO\n\r[9]N  Jerk dell asse PROCESSO'}}
 		else if (cursorInfo.word === 'CCAXSET')
 		  {return { contents: '[0]IPROP Guadagno proporzionale maglia di corrente ZSTAR\n\r[1]IINT Guadagno integrale maglia di corrente ZSTAR\n\r[2]VPROP Guadagno proporzionale maglia di velocità ZSTAR\n\r[3]VINT  Guadagno integrale maglia di velocità ZSTAR\n\r[4]IMAX Corrente massima al motore in mAmpere ZSTAR\n\r[5]Rampa del mandrino in rpm/sec PROCESSO\n\r[6]Jerk per rampa precisa in msec PROCESSO\n\r[7]ACMAX Accelerazione masisma in mm/sec2 PROCESSO\n\r[8]KV Guadagno proporzionale in sec 1/sec PROCESSO\n\r[9]ZZSMAX[0]Limitazione massima Speed Gamma1 in rpm'}}
+	  	//Variabili modulo AFI
+		else if (cursorInfo.word === 'CCNEWM')
+		  {return { contents: 'STRING WORD, contenente il codice M intercettato a 24mSec del provesso [X] '}}
+		else if (cursorInfo.word === 'CCNEWMA')
+		  {return { contents: 'STRING WORD, contenente il codice MA intercettato a 24mSec del provesso [X] '}}
+		else if (cursorInfo.word === 'CCNEWMB')
+		  {return { contents: 'STRING WORD, contenente il codice MB intercettato a 24mSec del provesso [X] '}}
+		else if (cursorInfo.word === 'CCNEWMC')
+		  {return { contents: 'STRING WORD, contenente il codice MC intercettato a 24mSec del provesso [X] '}}
+		else if (cursorInfo.word === 'CCNEWM2')
+		  {return { contents: 'STRING WORD, contenente il codice M intercettato a 2mSec del provesso [X] '}}
+		else if (cursorInfo.word === 'CCNEWMA2')
+		  {return { contents: 'STRING WORD, contenente il codice MA intercettato a 2mSec del provesso [X] '}}
+		else if (cursorInfo.word === 'CCNEWMB2')
+		  {return { contents: 'STRING WORD, contenente il codice MB intercettato a 2mSec del provesso [X] '}}
+		else if (cursorInfo.word === 'CCNEWMC2')
+		  {return { contents: 'STRING WORD, contenente il codice MC intercettato a 2mSec del provesso [X] '}}
+		//Variabili modulo IDC
+		else if (cursorInfo.word === 'CCIDCSTART')
+			{return { contents: 'Variabile per avviare il check driver IDC'}}
+		else if (cursorInfo.word === 'CCIDCRST')
+			{return { contents: 'Reset del test del driver in corso o precedentemente effettuato'}}
+		else if (cursorInfo.word === 'CCIDCOK')
+			{return { contents: 'Test IDC dei driver andato a buon fine'}}
+		else if (cursorInfo.word === 'CCIDCPRE')
+			{return { contents: 'Segnale di precarica drive raggiunta in modulo IDC'}}
 
 		else 
 			{return {contents: ''}}
