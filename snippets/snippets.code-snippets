@@ -194,5 +194,33 @@
 			"FFOUTANALOG(${1:valore},${2:canale})"
 		],
 		"description": "Funzione generare un rimerimento analogico tra -12V e +12V su canale Z-LINK"
+		},
+		"FFSION": {
+		"prefix": "FFSION",
+		"body": [
+			"FFSION(${1:channel},${2:numlog},${2:numproc)})"
+		],
+		"description": "Abilita interpolatore secondario modalita MOVE"
+		},
+		"FFSIOFF": {
+		"prefix": "FFSIOFF",
+		"body": [
+			"FFSIOFF(${1:channel})"
+		],
+		"description": "Disabilita canale interpolatore secondario"
+		},
+		"FFSIONFLW": {
+		"prefix": "FFSIONFLW",
+		"body": [
+			"FFSIONFLW(${1:channel},${2:numlog},${3:numproc},${4:numproc},${4:type},${4:numlogflw},${4:numprocflw})"
+		],
+		"description": "Abilita interpolatore secondario modalita FOLLOW"
+		},
+		"FFSIONJOG": {
+		"prefix": "FFSIONJOG",
+		"body": [
+			"FFSIONJOG(${1:channel},${2:numlog},${3:numproc})"
+		],
+		"description": "Abilita interpolatore secondario modalita JOG"
   }
 }

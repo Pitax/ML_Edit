@@ -169,8 +169,8 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
 	// The validator creates diagnostics for all uppercase words length 2 and more
 	let text = textDocument.getText();
 	let patternHH = /\b(?=HH)(?!(HHCURRMPERC|HHALARM|HHBOARDALARM|HHBOX|HHBRAKE|HHBRAKESTAT|HHCONTROL|HHCURR|HHCURRPERC|HHDCVOLT|HHDCVOLTOFF|HHENCMV|HHENCVERR|HHENCWARN|HHENDATN|HHENDATP|HHEVOALARM|HHEVOHW|HHEVORXER|HHEVOSTATUS|HHEVOTEMP|HHEVOTXER|HHEVOUPDSTATUS|HHEVOVERSION|HHIINTDTAR|HHIINTTAR|HHEVOWARNING|HHIMAXDTAR|HHIMAXTAR|HHIMOD|HHIMODPERC|HHIPROPDTAR|HHIPROPTAR|HHIREF|HHIREFPERC|HHIREFSET|HHISD|HHKVREFSET|HHMOTENC|HHMOTORSTATUS|HHMOTREF|HHMOTVEL|HHMOTVOLT|HHNOSMOOTHREF|HHPOLEPOS|HHPOSENC|HHPOWER|HHPOWERPERC|HHPOWEVOPOS|HHSAFESTAT|HHSLIP|HHSLSACTIVATE|HHSLSACTIVSTATUS|HHSLSSTATUS|HHSOSACTIVATE|HHSOSACTIVSTATUS|HHSOSSTATUS|HHSPEEDTOL|HHSPINLOAD|HHSTATUS|HHTEMPDRI|HHTEMPMOT|HHTIMES|HHTORQUE|HHTORQUEMODE|HHTURBOFREQ|HHTURBOMAP|HHTURNUNIT|HHVERS|HHVINTDTAR|HHVINTTAR|HHVPROPDTAR|HHVPROPTAR|HHVREFSET|HHVSD|HHVSQ|HHWARNING|HHZEROSTATUS|HHZEROTYPE)\b)\w+/g;
-	let patternGG = /\b(?=(GG))(?!(GGLIVEPHASE|GGZZTMP2U|GGZZDD|GGZZTMP5U|GGZZTMP0U|GGZZTT|GGZZTMP0U|GGPARFLAG|GGPAR24DE|GGPARFLAG|GGEENKMU|GGAD|GGADMAP|GGAPAGVIS|GGAPLGANTRY|GGBITBB|GGBLACKBOX|GGBUFIN|GGBUFINW|GGBUFOUT|GGCLOCK|GGCLOCKT|GGCLOCKTON|GGCNTIME|GGCOUNT|GGCOUNTCMD|GGCOUNTON|GGCOUNTOUT|GGCOUNTREF|GGCOUNTSET|GGCOUNTPLC|GGCNTIMEOFF|GGCOUPLE|GGCOUPLES|GGCOUPLE|GGDCOUPLE|GGDCOUPLES|GGDGANTRY|GGEPS|GGERLINK|GGERRWFILE|GGFIRSTCYCLE|GGFLAGANTRY|GGFLAGMLK|GGKMUOFFS|GGLANGUAGE|GGLICOP|GGMES|GGMESDE|GGMLTYPE|GGMONTH|GGNOMOD|GGNTOOL|GGNUMSERIE|GGOPSOFT|GGOUTKMU|GGOUTKMU|GGPA|GGPALMIN|GGPALMINL|GGPALMOUT|GGPALMOUTL|GGPKTLOST|GGPRMFLAG|GGPROC|GGPROCMAP|GGPUB|GGPUB|GGPUL|GGPUL|GGPUW|GGPUW|GGQUOLGANTRY|GGRS|GGSCOPESLOW|GGSEC|GGSHUTDOWN|GGSK|GGTALX|GGTALY|GGTALZ|#GGTALKX|#GGTALKY|#GGTALKZ|GGTERMPROC|GGTEXTERR|GGTEXTERRALL|GGTLGANTRY|GGTOOL…|GGTPLCK|GGUSTAB|GGVOLKMU|GGVOLKMU|GGWRITEVIS|GGZLINKBREAK|GGZLINKERRMAP|GGZLINKERR|GGZLINKSTAT)\b)\w+/g;
-	let patternZZ = /\b(?=ZZ)(?!(ZZOVEREFFS|ZZSPLINDLEPOS|ZZG151PHASE|ZZFLAG142|ZZG142S|ZZSAUXU|ZZSAUXE|ZZRESETCOUNT|ZZL|ZZOB|ZZMDIJOGFLAGS|ZZLIMITJOG|ZZR|ZZRA|ZZRBZZUFAST|ZZACINDEX|ZZACMANTAR|ZZAXVETL|ZZACMAXCOMP|ZZACMAXTAR|ZZACSATMAP|ZZACTOOL|ZZACTOOLPOINT|ZZASNKMU|ZZAXER|ZZAXERAL|ZZAXINCH|ZZAXINDEX|ZZAXJOG|ZZAXLIVE|ZZAXLIVERES|ZZAXLOAD|ZZAXMAP|ZZAXMDIJOG|ZZAXMOVMIN|#ZZAXMOVS|#ZZAXMOVSINC|#ZZAXMOVT|ZZAXMOVTIME|ZZAXNAME|ZZAXNKMU|ZZAXNOREP|ZZAXNOZERO|ZZAXRIP|ZZAXVEL|ZZAXVELMIN|ZZAXVELTIME|ZZAXVID|ZZBLCOMPNM|ZZBUFPOS|ZZBUFRIF|ZZCENTAV|ZZCENTAV|ZZCOMPNM|ZZCOMPNMVEL|ZZCONSIN-ZZCONSOUT|ZZCORRTERM|ZZCORRTERM|ZZCORS|ZZDATITAR|ZZDATITAR|ZZDDL|ZZDDR|ZZDDRA|ZZDDRB|ZZDGANTRY|ZZDIFFPOSNM|ZZDIST|ZZDMARK|ZZDRYRUN|ZZDRYMOV|ZZDZERO|ZZERCODE|ZZERFLAG|ZZERNMK|ZZERNM|ZZERRDPEMAIL|ZZFAMTOOL|ZZFEEDRG|ZZFILTOOL|ZZFJOGN|ZZFJOGP|ZZFLAGFOR|ZZFLAGML|ZZFLAGMOD|ZZFLAGMOD|ZZFMAX|ZZFPRG|ZZFREAL|ZZFRIPS|ZZGPHASE|ZZGIDATA|ZZGANTOFFCOM|ZZGANTOFFSTAT|ZZHOLD|ZZHOLDSTAT|ZZHWINPUTNUM|ZZHWMAP|ZZHWSTEPNM|ZZKVTAR|ZZINCJOG|ZZLEFF|ZZLIMFCMDI|ZZLIMIT|ZZLIMITAR|ZZLIMOBASE|ZZLIMOBASETAR|ZZLINK|ZZMAPSIM|ZZMESALARM|ZZMESFLAG|ZZMESHOLD|ZZMESSTOP|ZZMAXVEL|ZZMAXVEL|ZZMAXVELMAP|ZZMAXVELMAP|ZZMDIJOGFILE|ZZMDIJOGMAP|ZZMDIJOGSTATUS|ZZMDIMDIFILE|ZZMOVJOGZL|ZZMSG|ZZNAXTAR|ZZNOHOMING|ZZNOPOZMAN|ZZNUMGANTRY|ZZNUMDNC|ZZOBASE|ZZOFFJOG|ZZOFJOGNORES|ZZOFSURF|ZZOFSURFVEL|ZZOFSURFHW|ZZOFSURFMAP|ZZOFSURFMAXI|ZZOFSURFMOV|ZZOFSURFZERO|ZZOPRDISABLE|ZZORG|ZZORGSUP|ZZOVEREFF|ZZPAL|ZZPIECES|ZZPIECESFLAG|ZZPIECESREF|ZZPLCFAST|ZZPLCZERO|#ZZPLR|ZZPLS|#ZZPLT|#ZZPPR|#ZZPPT|ZZPOZ|ZZPOZAUTO|ZZPROBEMAP|ZZPROGN|ZZPWMFSTAT|ZZPZL|ZZQUOGANTRY|ZZRAPIDTAR|ZZREALCOMPNM|ZZREFNUM|ZZREFF|ZZSAUXT|ZZSETZERO|ZZSMAX|ZZSMAXG|ZZSPACESYNC|ZZSPEED|ZZSPEEDPROG|ZZSPINDATA|ZZSPINDATA|ZZSPINDLEPOS|ZZSPINDLEPOSREQ|ZZSPINDLERPM|ZZSPINLOAD|ZZSPINTAR|ZZSTARTCOUNT|ZZSTATO|ZZSTATOTAS|ZZSTOPCOUNT|ZZSTOPFAST|ZZSURVAX|ZZTACT|ZZTLIFEAX|ZZTFK|ZZTLIFEFLAG|ZZTLIFER|ZZTLIFERMEM|ZZTPROG|ZZTRANSTEP|ZZUADV|ZZUFAST|ZZVALG|ZZVALSYNC|ZZVELMAXCOMP|ZZVELMAXTAR|ZZVELMICR|ZZVG|ZZVMAXHW|ZZWALL|ZZWALLON|ZZWALLSTAT|ZZZNC)\b)\w+/g;
+	let patternGG = /\b(?=(GG))(?!(GGSISETPOS|GGSIPOSIN|GGSIPOS|GGSISETVEL|GGSISETINC|GSIPOS|GGSIVEL|GGSIRAP|GGSIOVR|GGSIFFW|GGSIINC|GGSIMOVP|GGSIMOVN|GGSIOVR|GGSIDISCRETE|GGSIFFW|GGSIDELAY|GGSIMAP|GGSIERRMAP|GGSIMOVING|GGSITYPE|GGSIAXES|GGSIDIST|GGSIERR|GGSIFLAG|GGFLWAXES|GGFLWDELTA|GGFLWERPOS|GGFLWERNEG|GGFLWPIVOT|GGSIMAP|GGSITYPE|GGSIAXES|ZZSIAXMAP|GGLIVEPHASE|GGZZTMP2U|GGZZDD|GGZZTMP5U|GGZZTMP0U|GGZZTT|GGZZTMP0U|GGPARFLAG|GGPAR24DE|GGPARFLAG|GGEENKMU|GGAD|GGADMAP|GGAPAGVIS|GGAPLGANTRY|GGBITBB|GGBLACKBOX|GGBUFIN|GGBUFINW|GGBUFOUT|GGCLOCK|GGCLOCKT|GGCLOCKTON|GGCNTIME|GGCOUNT|GGCOUNTCMD|GGCOUNTON|GGCOUNTOUT|GGCOUNTREF|GGCOUNTSET|GGCOUNTPLC|GGCNTIMEOFF|GGCOUPLE|GGCOUPLE3|GGCOUPLES|GGDCOUPLE|GGDCOUPLES|GGDGANTRY|GGEPS|GGERLINK|GGERRWFILE|GGFIRSTCYCLE|GGFLAGANTRY|GGFLAGMLK|GGKMUOFFS|GGLANGUAGE|GGLICOP|GGMES|GGMESDE|GGMLTYPE|GGMONTH|GGNOMOD|GGNTOOL|GGNUMSERIE|GGOPSOFT|GGOUTKMU|GGOUTKMU|GGPA|GGPALMIN|GGPALMINL|GGPALMOUT|GGPALMOUTL|GGPKTLOST|GGPRMFLAG|GGPROC|GGPROCMAP|GGPUB|GGPUB|GGPUL|GGPUL|GGPUW|GGPUW|GGQUOLGANTRY|GGRS|GGSCOPESLOW|GGSEC|GGSHUTDOWN|GGSK|GGTALX|GGTALY|GGTALZ|GGTALKX|GGTALKY|GGTALKZ|GGTERMPROC|GGTEXTERR|GGTEXTERRALL|GGTLGANTRY|GGTOOL…|GGTPLCK|GGUSTAB|GGVOLKMU|GGVOLKMU|GGWRITEVIS|GGZLINKBREAK|GGZLINKERRMAP|GGZLINKERR|GGZLINKSTAT)\b)\w+/g;
+	let patternZZ = /\b(?=ZZ)(?!(ZZRTCPNUMREQ|ZZOVEREFFS|ZZMAPZERO|ZZSPLINDLEPOS|ZZG151PHASE|ZZFLAG142|ZZG142S|ZZSAUXU|ZZSAUXE|ZZRESETCOUNT|ZZL|ZZOB|ZZMDIJOGFLAGS|ZZLIMITJOG|ZZR|ZZRA|ZZRBZZUFAST|ZZACINDEX|ZZACMANTAR|ZZSIAXMAP|ZZAXVETL|ZZACMAXCOMP|ZZACMAXTAR|ZZACSATMAP|ZZACTOOL|ZZACTOOLPOINT|ZZASNKMU|ZZAXER|ZZAXERAL|ZZAXINCH|ZZAXINDEX|ZZAXJOG|ZZAXLIVE|ZZAXLIVERES|ZZAXLOAD|ZZAXMAP|ZZAXMDIJOG|ZZAXMOVMIN|ZZAXMOVS|ZZAXMOVSINC|ZZAXMOVT|ZZAXMOVTIME|ZZAXNAME|ZZAXNKMU|ZZAXNOREP|ZZAXNOZERO|ZZAXRIP|ZZAXVEL|ZZAXVELMIN|ZZAXVELTIME|ZZAXVID|ZZBLCOMPNM|ZZBUFPOS|ZZBUFRIF|ZZCENTAV|ZZCENTAV|ZZCOMPNM|ZZCOMPNMVEL|ZZCONSIN-ZZCONSOUT|ZZCORRTERM|ZZCORRTERM|ZZCORS|ZZDATITAR|ZZDATITAR|ZZDDL|ZZDDR|ZZDDRA|ZZDDRB|ZZDGANTRY|ZZDIFFPOSNM|ZZDIST|ZZDMARK|ZZDRYRUN|ZZDRYMOV|ZZDZERO|ZZERCODE|ZZERFLAG|ZZERNMK|ZZERNM|ZZERRDPEMAIL|ZZFAMTOOL|ZZFEEDRG|ZZFILTOOL|ZZFJOGN|ZZFJOGP|ZZFLAGFOR|ZZFLAGML|ZZFLAGMOD|ZZFLAGMOD|ZZFMAX|ZZFPRG|ZZFREAL|ZZFRIPS|ZZGPHASE|ZZGIDATA|ZZGANTOFFCOM|ZZGANTOFFSTAT|ZZHOLD|ZZHOLDSTAT|ZZHWINPUTNUM|ZZHWMAP|ZZHWSTEPNM|ZZKVTAR|ZZINCJOG|ZZLEFF|ZZLIMFCMDI|ZZLIMIT|ZZLIMITAR|ZZLIMOBASE|ZZLIMOBASETAR|ZZLINK|ZZMAPSIM|ZZMESALARM|ZZMESFLAG|ZZMESHOLD|ZZMESSTOP|ZZMAXVEL|ZZMAXVEL|ZZMAXVELMAP|ZZMAXVELMAP|ZZMDIJOGFILE|ZZMDIJOGMAP|ZZMDIJOGSTATUS|ZZMDIMDIFILE|ZZMOVJOGZL|ZZMSG|ZZNAXTAR|ZZNOHOMING|ZZNOPOZMAN|ZZNUMGANTRY|ZZNUMDNC|ZZOBASE|ZZOFFJOG|ZZOFJOGNORES|ZZOFSURF|ZZOFSURFVEL|ZZOFSURFHW|ZZOFSURFMAP|ZZOFSURFMAXI|ZZOFSURFMOV|ZZOFSURFZERO|ZZOPRDISABLE|ZZORG|ZZORGSUP|ZZOVEREFF|ZZPAL|ZZPIECES|ZZPIECESFLAG|ZZPIECESREF|ZZPLCFAST|ZZPLCZERO|ZZPLR|ZZPLS|ZZPLT|ZZPPR|ZZPPT|ZZPOZ|ZZPOZAUTO|ZZPROBEMAP|ZZPROGN|ZZPWMFSTAT|ZZPZL|ZZQUOGANTRY|ZZRAPIDTAR|ZZREALCOMPNM|ZZREFNUM|ZZREFF|ZZSAUXT|ZZSETZERO|ZZSMAX|ZZSMAXG|ZZSPACESYNC|ZZSPEED|ZZSPEEDPROG|ZZSPINDATA|ZZSPINDATA|ZZSPINDLEPOS|ZZSPINDLEPOSREQ|ZZSPINDLERPM|ZZSPINLOAD|ZZSPINTAR|ZZSTARTCOUNT|ZZSTATO|ZZSTATOTAS|ZZSTOPCOUNT|ZZSTOPFAST|ZZSURVAX|ZZTACT|ZZTLIFEAX|ZZTFK|ZZTLIFEFLAG|ZZTLIFER|ZZTLIFERMEM|ZZTPROG|ZZTRANSTEP|ZZUADV|ZZUFAST|ZZVALG|ZZVALSYNC|ZZVELMAXCOMP|ZZVELMAXTAR|ZZVELMICR|ZZVG|ZZVMAXHW|ZZWALL|ZZWALLON|ZZWALLSTAT|ZZZNC)\b)\w+/g;
 	let m: RegExpExecArray | null;
 
 	let problems = 0;
@@ -447,6 +447,16 @@ connection.onHover(
 			{return { contents: 'Consente di attivare un asse.\r\nAnalogo al funzionamento di ZZAXLIVE = 1)'}} 
 		else if (cursorInfo.word === 'FFG29') 
 			{return { contents: 'Consente di disattivare un asse.\r\nAnalogo al funzionamento di ZZAXLIVE = 0)'}} 
+		else if (cursorInfo.word === 'CNCINJOG') 
+			{return { contents: 'Variabile che indica lo stato di JOG\r\n Equivale a ZZSTATOTAS[0] = 4'}} 
+		else if (cursorInfo.word === 'CNCINMDI') 
+			{return { contents: 'Variabile che indica lo stato di MDI\r\n Equivale a ZZSTATOTAS[0] = 10'}} 
+		else if (cursorInfo.word === 'CNCINAUTO') 
+			{return { contents: 'Variabile che indica lo stato di AUTO\r\n Equivale a ZZSTATOTAS[0] = 1'}} 
+		else if (cursorInfo.word === 'WRWORD') 
+			{return { contents: 'Scrive il valore del secondo numero all indirizzo del primo numero'}} 		
+		else if (cursorInfo.word === 'FFZEROH5R') 
+			{return { contents: 'Consente di effettuare la ripresa di zero per assi con tipo di ricerca zero H5R'}} 			
 		//Variabili ZZ
 		else if (cursorInfo.word === 'ZZSTATOTAS')
 			{return { contents: 'Contiene informazioni sullo stato della tastiera ed in generale sull`attività in corso in Z32.'}}
@@ -455,9 +465,9 @@ connection.onHover(
 		else if (cursorInfo.word === 'ZZFMAX') 
 			{return { contents: 'Permette di limitare la velocità degli assi in mm/min'}}
 		else if (cursorInfo.word === 'ZZMDIJOGSTATUS') 
-			{return { contents: 'Da interpretare come 4 bytes conteneti lo stato di MDIJOG che vengono azzerati da un ESC operativo ed al Reset.'}}
+			{return { contents: 'Da interpretare come 4 bytes conteneti lo stato di MDIJOG che vengono azzerati da un ESC operativo ed al Reset.\n\rariabile di supporto alla prestazione MDIJOG'}}
 		else if (cursorInfo.word === 'ZZMDIJOGMAP') 
-			{return { contents: 'La funzione consente di generare un riferimento, analogico o digitale, applicando un incremento.\n\rriferim = Valore del riferimento in uscita (+- 27594 max).\n\rnumout = Numero del canale di uscita su cui generare il riferimento:\n\rda 0 a 15 scrittura nell`area T dello Z-Link\n\rda 16 a 31 riferimenti analogici Z-Link\n\rda 32 a 63 scrittura da ZZLINK[160] a ZZLINK[191]\n\rda 64 a 79 scrittura nell`area S dello Z-Link\n\rda 80 a 96 scrittura da ZZLINK[208] a ZZLINK[224]\n\rda 100 a 114 numero asse ZSER (per assi da 0S a 14S)\n\rda 200 a 231 numero asse Z-STAR (per assi da 0H a 31H)\n\rda 300 a 315 numero asse Mechatrolink (per assi da 0M a 15M)\n\rincremento = Incremento del riferimento (valore assoluto sempre positivo)\n\rContiene la mappa degli assi continui (distinti per direzione di movimento) a cui si vuole associare sottoprogrammi da eseguire automaticamente in MDI.'}}
+			{return { contents: 'Contiene la mappa degli assi continui (distinti per direzione di movimento) a cui si vuole associare sottoprogrammi da eseguire automaticamente in MDI.\n\rariabile di supporto alla prestazione MDIJOG'}}
 		else if (cursorInfo.word === 'ZZACMANTAR') 
 			{return { contents: 'Consente di accedere alle tarature di “Rampa precisa” e “Jerk per rampa precisa” del mandrino principale ed ausiliario.\n\rZZACMANTAR[0] = Acmax mandrino principale in rpm/sec\n\rZZACMANTAR[1] = Acmax mandrino ausiliario in rpm/sec\n\rZZACMANTAR[2] = Numero di msec per raggiungere acmax per mandrino principale\n\rZZACMANTAR[3] = Numero di msec per raggiungere acmax per mandrino ausiliario\n\r'}}
 		else if (cursorInfo.word === 'ZZBUFRIF') 
@@ -500,6 +510,8 @@ connection.onHover(
 			{return { contents: 'Contiene la prima causa d errore che rende impossibile l aggiornamento dei parametri TCT e TCM durante la prestazione TLIFE'}}
 		else if (cursorInfo.word === 'ZZTLIFERMEM') 
 			{return { contents: 'Contiene la quantita di memoria libera in CMOS per i files CMOS  quando si verifica un errore segnalatonella variabile ZZLIFER'}}
+			else if (cursorInfo.word === 'ZZRTCPNUMREQ') 
+		{return { contents: 'Consente di variare i numeri logici degli assi corrispondenti ai tre assi lineari di RTCP'}}
 		//Variabili della memoria di Sistema	Verso il CNC   
 		else if (cursorInfo.word === 'STARTCNC' || cursorInfo.word === '0E0') 
 			{return { contents: 'Bit 0E0 - Richiesta si START'}}	
@@ -682,6 +694,8 @@ connection.onHover(
 			{return { contents: 'Bit 9U6 - Zero in Corso Asse Nlog 6'}}	
 		else if (cursorInfo.word === 'CNCZEROAX7' || cursorInfo.word === '9U7') 
 			{return { contents: 'Bit 9U7 - Zero in Corso Asse Nlog 7'}}	
+		else if (cursorInfo.word === 'POSMOK' || cursorInfo.word === 'EU4') 
+			{return { contents: 'Bit EU1 - Mandrino in Posizione'}}	
 		else if (cursorInfo.word === 'MRAMP' || cursorInfo.word === 'EU4') 
 			{return { contents: 'Bit EU4 - Mandrino in Rampa'}}	
 		else if (cursorInfo.word === 'MANDINMOTO' || cursorInfo.word === 'EUB') 
@@ -785,13 +799,13 @@ connection.onHover(
 		else if (cursorInfo.word === 'AUSSPINDLEACT') 
 			{return { contents: 'Il Mandrino Ausiliario è comandato in Velocità quando non attivo'}}	
 		else if (cursorInfo.word === 'MAINSPINDLERPM') 
-			{return { contents: 'Riferimento Comando Velocità Mandrino Principale'}}	
+			{return { contents: 'Riferimento Comando Velocità Mandrino Principale\n\rZZSAUXE[1]'}}	
 		else if (cursorInfo.word === 'MAINSPEEDPROG') 
-			{return { contents: 'Riferimento del CNC Velocità Mandrino Principale'}}	
+			{return { contents: 'Riferimento del CNC Velocità Mandrino Principale\n\rZZSAUXU[1]'}}	
 		else if (cursorInfo.word === 'AUSSPINDLERPM') 
-			{return { contents: 'Riferimento Comando Velocità Mandrino Ausiliario'}}	
+			{return { contents: 'Riferimento Comando Velocità Mandrino Ausiliario\n\rZZSAUXE[2]'}}	
 		else if (cursorInfo.word === 'AUSSPEEDPROG') 
-			{return { contents: 'Riferimento del CNC Velocità Mandrino Ausiliario'}}	
+			{return { contents: 'Riferimento del CNC Velocità Mandrino Ausiliario\n\rZZSAUXU[2]'}}	
 		//Variabili modulo DEM
 		else if (cursorInfo.word === 'CCSPIENAUX')
 			{return { contents: 'Mappa a bit per processo di segnale per abilitazione alla coppia per il mandrino ausiliario..\n\rDopo la funzione FFSPIENABLE()'}}
@@ -943,6 +957,27 @@ connection.onHover(
 			{return { contents: 'Test IDC dei driver andato a buon fine'}}
 		else if (cursorInfo.word === 'CCIDCPRE')
 			{return { contents: 'Segnale di precarica drive raggiunta in modulo IDC'}}
+		//Variabili interpolatore secondario
+		else if (cursorInfo.word === 'GGSISETVEL')
+			{return { contents: 'Abilita interpolatore secondario in velocita sul canale .x'}}
+		else if (cursorInfo.word === 'GGSISETPOS')
+			{return { contents: 'Abilita interpolatore secondario in posizione sul canale .x'}}
+		else if (cursorInfo.word === 'GGSISETINC')
+			{return { contents: 'Abilita interpolatore secondario in incrementale sul canale .x'}}
+		else if (cursorInfo.word === 'GGSIMOVP')
+			{return { contents: 'Movimento positivo in modlaita velocita o incrementale su interpolatore secondario canale .x'}}
+		else if (cursorInfo.word === 'GGSIMOVN')
+			{return { contents: 'Movimento negatico in modlaita velocita o incrementale su interpolatore secondario canale .x'}}
+		else if (cursorInfo.word === 'GGSIRAP')
+			{return { contents: 'Mette la velocita uguale al valore del rapido su interpolatore secondario'}}
+		else if (cursorInfo.word === 'GGSIOVR')
+			{return { contents: 'Override durante movimenti MOVE interpolatore secondario'}}
+		else if (cursorInfo.word === 'GGSIVEL')
+			{return { contents: 'Valore velocita interpolatore secondario'}}
+			else if (cursorInfo.word === 'GGSIPOS')
+		{return { contents: 'Valore posizione intepolatore secondario modalita posizionamento'}}
+		else if (cursorInfo.word === 'GGSIINC')
+			{return { contents: 'Valore incremento intepolatore secondario modalita incrementale'}}
 
 		else 
 			{return {contents: ''}}
