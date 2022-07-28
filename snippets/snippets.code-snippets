@@ -222,5 +222,12 @@
 			"FFSIONJOG(${1:channel},${2:numlog},${3:numproc})"
 		],
 		"description": "Abilita interpolatore secondario modalita JOG"
+		},
+		"for": {
+		"prefix": "for",
+		"body": [
+			"for(${1:inizializzazioni},${2:condizione ok},${3:incremento})"
+		],
+		"description": "Ciclo For"
   }
 }

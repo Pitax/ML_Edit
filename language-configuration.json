@@ -36,7 +36,7 @@
     // },
     "indentationRules": 
     {
-          "increaseIndentPattern": "(?<!(end |End ))\\b(if|Function|else|elseif|Function|Module 24|Module 8|Module 2)\\b",
-          "decreaseIndentPattern": "\\b(end if|else|elseif|End Function|End Module)\\b"
+          "increaseIndentPattern": "(?<!(end |End ))\\b(if|Function|else|elseif|Function|Module 24|Module 8|Module 2|for)\\b",
+          "decreaseIndentPattern": "\\b(end if|else|elseif|End Function|End Module|end for)\\b"
     }
 }
