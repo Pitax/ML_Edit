@@ -219,15 +219,22 @@
 		"FFSIONJOG": {
 		"prefix": "FFSIONJOG",
 		"body": [
-			"FFSIONJOG(${1:channel},${2:numlog},${3:numproc})"
+			"FFSIONJOG(${1:channel};${2:numlog};${3:numproc})"
 		],
 		"description": "Abilita interpolatore secondario modalita JOG"
 		},
 		"for": {
 		"prefix": "for",
 		"body": [
-			"for(${1:inizializzazioni},${2:condizione ok},${3:incremento})"
+			"for(${1:LONG INDEX = 0};${2:INDEX>x};${3:INDEX = INDEX+1})"
 		],
 		"description": "Ciclo For"
+		},
+		"DDPOS": {
+		"prefix": "DDPOS",
+		"body": [
+			"DDPOS(${1:tipo};${2:numlog};${3:numproc})"
+		],
+		"description": "Leggi quota Asse in double"
   }
 }
