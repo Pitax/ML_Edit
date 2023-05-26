@@ -10,6 +10,6 @@ Simula alcune funzioni native di ML edit dentro VS code
 - Sengalazione errore in caso di scrittura errata funzioni CNC (parziale)
 
 ## Versione
-1.2.0
+2.0.0
 
 

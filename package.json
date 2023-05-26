@@ -51,6 +51,10 @@
 		"languages": [
 			{
 				"id": "ml",
+				"icon": {
+					"light": "./icon/ml.svg",
+					"dark": "./icon/ml.svg"
+				  },
 				"aliases": [
 					"ML",
 					"ml"
